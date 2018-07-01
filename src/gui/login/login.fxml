@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1">
+	<children>
+			<Label text="Hello world FXML" fx:id="label" />
+	</children>
+</VBox>
+
