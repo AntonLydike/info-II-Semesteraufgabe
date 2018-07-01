@@ -1,1 +1,75 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+
+
+/* variables:
+ * green: 	#40ba5e;
+ * bg: 		#0e1f2b; 
+ * btn bg: 	#636d72
+ * 
+ */
+
+#root {
+	-fx-font-family: "Open Sans";
+	-fx-text-fill: #eee;
+	-fx-background-color: #0e1f2b;
+}
+
+ScrollPane, GridPane, Pane, StackPane {
+	-fx-focus-color: transparent;
+	-fx-background-color:transparent;
+}
+
+Label {
+	-fx-padding: 4px 0 4px 0;
+	-fx-font-size: 16px;
+	-fx-text-fill: #eee;
+}
+
+Label.error {
+	-fx-padding: 0 0 0 0;
+	-fx-text-fill: #ff8484;
+	-fx-font-family: "Open Sans";
+}
+
+#yield Label.light, 
+#yield Label.title, 
+#yield Label.title2 {
+	-fx-font-family: "Open Sans Light";
+}
+#yield Label.title{
+	-fx-font-size: 34px;
+}
+#yield Label.title2{
+	-fx-font-size: 28px;
+}
+
+#yield Label.italic {
+	-fx-font-style: italic ;
+	-fx-font-family: "Open Sans Italic";
+}
+
+#yield {
+	-fx-padding:24px 0px;
+	-fx-background-color: #0e1f2b;
+}
+
+Button {
+	-fx-background-color: #636d72;
+	-fx-text-fill: #eee;
+	-fx-padding: 8px 24px;
+	-fx-border-color: #eee;
+	-fx-border-radius: 3px;
+	-fx-cursor: hand;
+}
+
+Button:hover {
+	-fx-background-color: #33393c;
+}
+
+Button:pressed {
+	
+}
+
+.yielded {
+	
+}

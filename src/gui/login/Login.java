@@ -14,7 +14,7 @@ public class Login implements Renderable {
         try {
         	loader.setController(new LoginController());
 			loader.setLocation(getClass().getResource("login.fxml"));
-			VBox node = loader.<VBox>load();
+			Node node = loader.<Node>load();
 	        return node;
 		} catch (IOException e) {
 			e.printStackTrace();
