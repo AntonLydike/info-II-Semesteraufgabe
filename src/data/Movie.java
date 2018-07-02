@@ -16,6 +16,7 @@ public class Movie implements Comparable<Movie>{
 	private byte mcRating;	 // metaCritic Rating
 	private byte rtRating;	 // Rotten Tomatoes Rating
 	private byte rtaRating;  // Rotten Tomatoes audience rating
+	private int year;
 
 	public Movie(String rtPath) {
 		this.actors = new ArrayList<Actor>();
@@ -23,7 +24,7 @@ public class Movie implements Comparable<Movie>{
 	}	
 
 	public Movie(String rtPath, String posterURL, String title, String description, ArrayList<Actor> actors,
-			Person director, byte imdbRating, byte mcRating, byte rtRating, byte rtaRating) {
+			Person director, byte imdbRating, byte mcRating, byte rtRating, byte rtaRating, int year) {
 		
 		setRtPath(rtPath);
 		setPosterURL(posterURL);
@@ -35,6 +36,7 @@ public class Movie implements Comparable<Movie>{
 		setMcRating(mcRating);
 		setRtRating(rtRating);
 		setRtaRating(rtaRating);
+		setYear(year);
 	}
 
 	public String getRtPath() {
@@ -60,6 +62,12 @@ public class Movie implements Comparable<Movie>{
 	}
 	public void setDescription(String description) {
 		this.description = description;
+	}
+	public void setYear(int y) {
+		year = y;
+	}
+	public int getYear() {
+		return year;
 	}
 	
 	public Person getDirector() {

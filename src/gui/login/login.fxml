@@ -5,7 +5,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-
 <VBox alignment="CENTER" prefHeight="436.0" prefWidth="522.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER">
@@ -25,9 +24,9 @@
                         <Label styleClass="title" text="Login" />
                         <Label text="Username:" GridPane.rowIndex="1" />
                         <Label text="Password" GridPane.rowIndex="2" />
-                        <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" text="LOGIN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                        <TextField onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button mnemonicParsing="false" onAction="#btnClick" text="LOGIN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                      </children>
                      <opaqueInsets>
                         <Insets />

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<VBox prefWidth="160.0" styleClass="movie-card" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefWidth="120.0" VBox.vgrow="ALWAYS">
+         <children>
+            <ImageView fx:id="cover" fitWidth="120.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <FlowPane prefWidth="200.0" VBox.vgrow="NEVER">
+         <children>
+            <Label fx:id="title" text="Thor: Ragnarok" />
+            <Label fx:id="year" styleClass="grey" text="(2017)" textFill="#b2afaf" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+         </padding>
+      </FlowPane>
+      <FlowPane prefWidth="200.0" VBox.vgrow="NEVER">
+         <children>
+            <Label styleClass="grey" text="By: " />
+            <Label fx:id="director" styleClass="link" text="Taika Waititi" />
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" />
+         </padding>
+      </FlowPane>
+      <HBox fx:id="rating" prefHeight="24.0" prefWidth="200.0" VBox.vgrow="NEVER">
+         <children>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image></ImageView>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/star.png" />
+               </image>
+            </ImageView>
+         </children>
+         <padding>
+            <Insets bottom="8.0" left="8.0" right="8.0" />
+         </padding>
+      </HBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</VBox>

@@ -1,11 +1,7 @@
 package gui;
 
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import data.*;
-import gui.login.*;
 
 public class Router {
 	private static Router instance;
