@@ -23,6 +23,7 @@ Label {
 	-fx-padding: 4px 0 4px 0;
 	-fx-font-size: 16px;
 	-fx-text-fill: #eeeeee;
+	-fx-fill: #eeeeee;
 }
 
 Label.error {
@@ -61,6 +62,10 @@ Label.link {
 	-fx-background-color: #0e1f2b;
 }
 
+.smaller Label {
+	-fx-font-size: 12px;
+}
+
 Button {
 	-fx-background-color: #636d72;
 	-fx-text-fill: #eeeeee;
@@ -74,9 +79,6 @@ Button:hover {
 	-fx-background-color: #33393c;
 }
 
-Button:pressed {
-	
-}
 
 .yielded {
 	
