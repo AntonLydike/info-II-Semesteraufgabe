@@ -19,3 +19,12 @@ werden können. Filme sollen außerdem als gesehen markiert werden und bewertet 
 Der Router ist im Singleton-Muster implementiert und kann Objekte die Renderable implementieren im layout rendern.
 
 Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Controller um auf Events zu reagieren / das Template mit Daten zu füllen.
+
+## ToDo:
+
+**Views**
+ - Login 
+ - Signup
+ - Adding new movie
+ - Home
+ - Movie details view
