@@ -9,11 +9,16 @@
 
 <VBox maxWidth="180.0" prefWidth="180.0" styleClass="movie-card" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane maxWidth="180.0" prefWidth="180.0" VBox.vgrow="NEVER">
+      <StackPane>
          <children>
+            <ImageView fitHeight="248.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/loader.dark.gif" />
+               </image>
+            </ImageView>
             <ImageView fx:id="cover" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
          </children>
-      </Pane>
+      </StackPane>
       <FlowPane maxWidth="180.0" prefWidth="180.0" prefWrapLength="160.0" VBox.vgrow="NEVER">
          <children>
             <Label fx:id="title" maxWidth="164.0" prefWidth="164.0" text="Rogue One: A StarWars Story" wrapText="true" />

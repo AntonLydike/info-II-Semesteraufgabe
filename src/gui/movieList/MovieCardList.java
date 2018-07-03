@@ -32,10 +32,4 @@ public class MovieCardList implements Renderable {
 		return fp;
 	}
 
-	@Override
-	public void beforeUnload() {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

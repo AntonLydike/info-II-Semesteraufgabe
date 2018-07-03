@@ -32,12 +32,6 @@ public class Login implements Renderable {
 		}
         return null;
 	}
-
-	@Override
-	public void beforeUnload() {
-		System.out.println("before unload");
-	}
-
 }
 
 class LoginController {
@@ -61,8 +55,8 @@ class LoginController {
 			router.render(new MovieCardList(new ArrayList<>()));
 		} catch (LoginFailedException e1) {
 			System.out.println("SHOW ERROR");
-			error.setText(e1.getMessage());
-			error.setTextFill(Paint.valueOf("RED"));
+/*			error.setText(e1.getMessage());
+			error.setTextFill(Paint.valueOf("RED"));*/
 			LayoutController.error(e1.getMessage());
 		}
 

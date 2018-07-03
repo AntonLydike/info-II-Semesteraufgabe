@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import data.Movie;
 import data.Person;
 import gui.Router;
-import gui.components.MovieCard;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -15,7 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import gui.login.Login;
 import gui.movieList.MovieCardList;
-
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
@@ -89,7 +87,7 @@ public class Main extends Application {
         
         router.render(new Login());
         
-        // router.render(new MovieCardList(list));
+        //router.render(new MovieCardList(list));
 
 	}
 	

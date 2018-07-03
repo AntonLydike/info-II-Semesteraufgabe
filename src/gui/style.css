@@ -55,7 +55,7 @@ Label.italic {
 }
 
 Label.link {
-	-fx-text-fill: #328cbc;
+	/*-fx-text-fill: #328cbc;*/
 }
 
 #yield {
@@ -78,6 +78,15 @@ Button {
 
 Button:hover {
 	-fx-background-color: #33393c;
+}
+
+Button.secondary {
+	-fx-background-color: #404649;
+	-fx-border-color: #869299;
+	-fx-text-fill: #869299;
+}
+Button.secondary:hover {
+	-fx-background-color: #4d5559;
 }
 
 

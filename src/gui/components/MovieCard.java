@@ -35,10 +35,6 @@ public class MovieCard implements Renderable {
 		}
         return null;
 	}
-
-	@Override
-	public void beforeUnload() {
-	}
 }
 
 class MovieCardController {
