@@ -23,7 +23,7 @@ public class Movie implements Comparable<Movie>{
 		this.rtPath = rtPath;
 	}	
 
-	public Movie(String rtPath, String posterURL, String title, String description, ArrayList<Actor> actors,
+	public Movie(String rtPath, String posterURL, String title, String description,
 			Person director, byte imdbRating, byte mcRating, byte rtRating, byte rtaRating, int year) {
 		
 		setRtPath(rtPath);
