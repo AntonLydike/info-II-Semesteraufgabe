@@ -38,5 +38,5 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
  - login(username, password)
  - register(username, password)
  
- The movies actors and persons in general are **not** stored in the DB but pulled in real time from RT.
+ The movies actors and persons in general are **not** stored in the DB but are pulled in real time from RT.
  
