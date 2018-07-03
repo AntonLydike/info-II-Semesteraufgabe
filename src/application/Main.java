@@ -87,11 +87,10 @@ public class Main extends Application {
         
         list.add(m);
         
+        router.render(new Login());
         
-        
-        //router.render(new Login());
-        
-        router.render(new MovieCardList(list));
+        // router.render(new MovieCardList(list));
+
 	}
 	
 	public static void main(String[] args) {

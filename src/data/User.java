@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class User {
 
 	private ArrayList<WatchListItem> watchlist;
+	private String id;
 	private String username;
 	
 	public User(String username) {
