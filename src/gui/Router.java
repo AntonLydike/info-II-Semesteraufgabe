@@ -42,4 +42,8 @@ public class Router {
 		LayoutController.display(next, curr);
 		curr = next;
 	}
+	
+	public Stage getStage() {
+		return stage;
+	}
 }
