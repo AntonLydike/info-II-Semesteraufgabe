@@ -1,14 +1,20 @@
 package gui;
 
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 public class LayoutController {
 	private static LayoutController instance = null;
 	
+	@FXML
 	public StackPane yield;
+	@FXML
 	public Label error;
+	@FXML
+	public AnchorPane root;
 	
 	public LayoutController() {
 		if (instance != null) {

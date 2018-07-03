@@ -30,6 +30,7 @@ Label.error {
 	-fx-padding: 0 0 0 0;
 	-fx-text-fill: #ff8484;
 	-fx-font-family: "Open Sans";
+	-fx-font-size: 12px;
 }
 
 Label.grey {
