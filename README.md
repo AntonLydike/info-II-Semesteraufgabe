@@ -28,3 +28,13 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
  - Adding new movie
  - Home
  - Movie details view
+ 
+**Methods in the persistence layer**
+ - getWatchlist(user)
+ - addToWatchlist(movie)
+ - removeFromWatchlist(movie)
+ - setWatched(movie, boolean watched)
+ - setRating(movie, rating)
+ - login(username, password)
+ - register(username, password)
+ 
