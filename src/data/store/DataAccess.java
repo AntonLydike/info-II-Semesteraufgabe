@@ -19,7 +19,7 @@ public class DataAccess {
 
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
-    private static final String url = "jdbc:mysql://localhost:3306/filmdatenbank?useSSL=false";
+    private static final String url = "jdbc:mysql://s62.goserver.host:3306/web223_db9?useSSL=false"; // not sure if useSSL=false is needed
     private static final String user = "web223_9";
     private static final String password = "AavNRk6mgGBur2dR+WimITGkRcGYPOc+";
     // db name: web223_db9
