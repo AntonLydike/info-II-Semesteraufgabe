@@ -15,6 +15,8 @@ public class MovieCardList implements Renderable {
 	
 	public MovieCardList(ArrayList<Movie> list) {
 		this.list = list;
+
+		// TODO should load list dynamically depending on user credentials
 	}
 
 	@Override

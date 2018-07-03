@@ -24,8 +24,8 @@
                         <Label styleClass="title" text="Login" />
                         <Label text="Username:" GridPane.rowIndex="1" />
                         <Label text="Password" GridPane.rowIndex="2" />
-                        <TextField onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <PasswordField onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="username" onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <PasswordField fx:id="password" onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <Button mnemonicParsing="false" onAction="#btnClick" text="LOGIN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                      </children>
                      <opaqueInsets>

@@ -40,6 +40,6 @@ public class Router {
 		// add a css class to make the "inserted element" styleable
 		next.getStyleClass().add("yielded");
 		LayoutController.display(next, curr);
-		
+		curr = next;
 	}
 }
