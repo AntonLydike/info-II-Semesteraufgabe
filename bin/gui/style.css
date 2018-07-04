@@ -59,7 +59,6 @@ Label.link {
 }
 
 #yield {
-	-fx-padding:24px 0px;
 	-fx-background-color: #0e1f2b;
 }
 
@@ -89,9 +88,12 @@ Button.secondary:hover {
 	-fx-background-color: #4d5559;
 }
 
-
-.yielded {
-	
+TextField.large {
+	-fx-font-size: 24px;
+	-fx-background-color: #20313d;
+	-fx-border-color: #21313d;
+	-fx-border-radius: 8px;
+	-fx-text-fill: #828c93;
 }
 
 .movie-card {
