@@ -10,8 +10,7 @@ public class PersonDTO implements Entity {
 
     @Col(name="rtPath")
     private String rtPath; // path on rotten tomatoes, primary ID
-
-    @Override
+    
     public String getName() {
         return name;
     }
