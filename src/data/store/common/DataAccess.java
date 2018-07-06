@@ -6,11 +6,12 @@
  *
  */
 
-package data.store;
+package data.store.common;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Logger;
 
 /** Establishes connection to the database, Singelton object
  *
@@ -19,18 +20,21 @@ public class DataAccess {
 
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
-    private static final String url = "jdbc:mysql://s62.goserver.host:3306/web223_db9?useSSL=false"; // not sure if useSSL=false is needed
+    private static final String url = "jdbc:mysql://s62.goserver.host:3306/web223_db9?useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"; // not sure if useSSL=false is needed
     private static final String user = "web223_9";
     private static final String password = "AavNRk6mgGBur2dR+WimITGkRcGYPOc+";
     // db name: web223_db9
     private Connection con = null;
     private static DataAccess unique = null;
 
+    private static final Logger LOGGER = Logger.getLogger(DataAccess.class.getName());
+
     /**
      * Create connection to Database
      *
      */
     private DataAccess() throws ClassNotFoundException, SQLException {
+        LOGGER.info("Open connection to database");
         Class.forName(driver);
         con = DriverManager.getConnection(url, user, password);
     }
@@ -54,7 +58,7 @@ public class DataAccess {
             if (con != null)
                 con.close();
         } catch (SQLException e) {
-            System.out.println("Datenbankfehler beim Schließen");
+            LOGGER.severe("Failed to close connection: " + e.getMessage());
         }
     }
 

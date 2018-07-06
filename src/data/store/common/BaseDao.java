@@ -1,4 +1,4 @@
-package data.store;
+package data.store.common;
 
 import data.common.Col;
 import data.common.Entity;
@@ -112,14 +112,14 @@ public class BaseDao<T extends Entity> {
     public boolean insert(Map<String, String> params) throws SQLException {
         LOGGER.info("Insert entity, parameters: {params: " + params + ", table: " + table + " }");
 
-        Map<Integer, Object> values = new HashMap<>();
+        ArrayList<Object> values = new ArrayList<>();
         String nameString = "";
         String valueString = "";
         int i = 1;
         for (Map.Entry<String, String> param : params.entrySet()) {
             nameString = i == params.size() ? nameString.concat(param.getKey()) : nameString.concat(param.getKey()).concat(",");
             valueString = i == params.size() ? valueString.concat("?") : valueString.concat("?,");
-            values.put(i, param.getValue());
+            values.add(param.getValue());
             i++;
         }
         String sqlStatement = getSQLStatement(INSERT_ENTITY).replace("${names}", nameString).replace("${values}", valueString);
@@ -141,16 +141,16 @@ public class BaseDao<T extends Entity> {
     public boolean update(String id, Map<String, String> params) throws SQLException {
         LOGGER.info("Update entity, parameters: {id: " + id + ", params: " + params + ", table: " + table + " }");
 
-        Map<Integer, Object> values = new HashMap<>();
+        ArrayList<Object> values = new ArrayList<>();
         String valueString = "";
         int i = 1;
         for (Map.Entry<String, String> param : params.entrySet()) {
             String pair = param.getKey() + "=?";
             valueString = i == params.size() ? valueString.concat(pair) : valueString.concat(pair + ", ");
-            values.put(i, param.getValue());
+            values.add(param.getValue());
             i++;
         }
-        values.put((params.size() + 1), id);
+        values.add(id);
         String sqlStatement = getSQLStatement(UPDATE_ENTITY).replace("${values}", valueString);
 
 
@@ -222,11 +222,11 @@ public class BaseDao<T extends Entity> {
      *         count or there is no result
      * @throws SQLException if a database access error occurs
      */
-    protected boolean executeSQL(String sql, Map<Integer, Object> params) throws SQLException {
+    protected boolean executeSQL(String sql, List params) throws SQLException {
         LOGGER.info("Execute SQL Statement, parameters: {statement: \"" + sql + "\", params: " + params + ", table: " + table + " }");
         PreparedStatement s = dataAccess.getConnection().prepareStatement(sql);
-        for (Map.Entry<Integer, Object> param : params.entrySet() ) {
-            s.setObject(param.getKey(), param.getValue());
+        for (int i = 0; i < params.size(); i++) {
+            s.setObject(i+1, params.get(i));
         }
 
         return s.execute();
