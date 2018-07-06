@@ -88,21 +88,21 @@ public class MovieInfoApi {
 	/**
 	 * Uses RottenTomatoes Search api to look for a certain query
 	 * @param query: The string to look for on rotten tomatoes
-	 * @return a JSONObject containing movies, actors and series
+	 * @return a RtQueryDTO containing movies and series found for that query
 	 * @throws APIRequestException
 	 */
-	public JSONObject rtQuery(String query) throws APIRequestException {
-		return getJsonAt(buildQueryString("rt", "find", "q=" + encodeURIcomponent(query)), "[rt/find?q=" + query + "]");
+	public RtQueryDTO rtQuery(String query) throws APIRequestException {
+		return new RtQueryDTO(getJsonAt(buildQueryString("rt", "find", "q=" + encodeURIcomponent(query)), "[rt/find?q=" + query + "]"));
 	}
 
 	/**
 	 * Scrapes RT at path and returns info about that movie
 	 * @param rtPath: The path on rotten tomatoes to scrape
-	 * @return a JSONObject containing that movies data
+	 * @return a RtMovieDTO object containing that movies data
 	 * @throws APIRequestException
 	 */
-	public JSONObject rtInfo(String rtPath) throws APIRequestException {
-		return getJsonAt(buildQueryString("rt", "info", "url=" + encodeURIcomponent(rtPath)),  "[rt/info?url=" + rtPath + "]");
+	public RtMovieDTO rtInfo(String rtPath) throws APIRequestException {
+		return new RtMovieDTO(getJsonAt(buildQueryString("rt", "info", "url=" + encodeURIcomponent(rtPath)),  "[rt/info?url=" + rtPath + "]"), rtPath);
 	}
 
 	/**
