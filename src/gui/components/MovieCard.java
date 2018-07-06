@@ -2,6 +2,8 @@ package gui.components;
 
 import java.io.IOException;
 import gui.Renderable;
+import gui.Router;
+import gui.movie.MovieView;
 import data.Movie;
 import data.WatchListItem;
 import javafx.event.ActionEvent;
@@ -10,9 +12,15 @@ import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
+/**
+ * Creates a card displaying a watchlist Item. The poster, name, year, director and rating get displayed. Clicking on it toggles it's watched state.
+ * @author anton
+ *
+ */
 public class MovieCard implements Renderable {
 	private WatchListItem item;
 	
@@ -29,7 +37,7 @@ public class MovieCard implements Renderable {
 		FXMLLoader loader = new FXMLLoader();
         try {
         	loader.setController(new MovieCardController(item));
-			loader.setLocation(getClass().getResource("MovieCard.fxml"));
+			loader.setLocation(getClass().getResource("/gui/components/MovieCard.fxml"));
 			Node node = loader.<Node>load();
 			
 	        return node;
@@ -40,6 +48,7 @@ public class MovieCard implements Renderable {
 	}
 }
 
+// Controller class for Movie Card
 class MovieCardController {
 	private Movie movie;
 	private WatchListItem item;
@@ -86,13 +95,12 @@ class MovieCardController {
 		}
 		int rating = total / count;
 
-		String fullStar = "./gui/images/star.png";
-		String halfStar = "./gui/images/star_half.png";
-		String noStar = "./gui/images/star_empty.png";
+		String fullStar = "/gui/images/star.png";
+		String halfStar = "/gui/images/star_half.png";
+		String noStar = "/gui/images/star_empty.png";
 
 
 		// Calculate the stars shown:
-		System.out.println("Total score: " + rating);
 		int imgIndex = 0;
 		if (rating <= 10) {
 			((ImageView) this.rating.getChildren().get(0)).setImage(new Image(noStar));
@@ -135,4 +143,23 @@ class MovieCardController {
 			}
 		}).start();
 	}
+	
+	@FXML
+	public void toggleWatched(MouseEvent e) {
+		if (e.getClickCount() <= 2) {
+			item.setWatched(!item.isWatched());
+			
+			if (item.isWatched()) {
+				card_root.getStyleClass().add("movie-checked");
+			} else {
+				card_root.getStyleClass().remove("movie-checked");
+			}
+		}
+		if (e.getClickCount() == 2) {
+			Router.instance().render(new MovieView(item));
+		}
+		
+	}
+	
+	
 }

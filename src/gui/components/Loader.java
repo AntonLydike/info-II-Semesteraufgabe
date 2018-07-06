@@ -12,6 +12,6 @@ public class Loader implements Renderable {
 	}
 	
 	public static Image getImage() {
-		return new Image("file:./../images/loader.dark.gif");
+		return new Image("/gui/images/loader.dark.gif");
 	}
 }
