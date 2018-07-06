@@ -7,15 +7,17 @@ package data;
 public class Person implements Comparable<Person>{
 
 	private String name;
+	private String imageURL;
 	private String rtPath; // path on rotten tomatoes, primary ID
 	
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(String name, String rtPath) {
+	public Person(String name, String imageURL, String rtPath) {
 		super();
 		this.name = name;
+		this.imageURL = imageURL;
 		this.rtPath = rtPath;
 	}
 
@@ -25,6 +27,14 @@ public class Person implements Comparable<Person>{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getImageURL() {
+		return imageURL;
+	}
+
+	public void setImageURL(String imageURL) {
+		this.imageURL = imageURL;
 	}
 
 	public String getRtPath() {
