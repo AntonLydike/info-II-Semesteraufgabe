@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import data.Movie;
 import data.Person;
+import data.User;
 import gui.Router;
 import gui.home.HomeView;
 import javafx.application.Application;
@@ -18,7 +19,7 @@ import gui.movieList.MovieCardList;
 public class Main extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
-		// initialize controller with stage
+		// initialize router with stage
         Router router = Router.init(stage);
         
 		Parent root = FXMLLoader.load(getClass().getResource("../gui/layout.fxml"));
@@ -39,13 +40,16 @@ public class Main extends Application {
         
         
         
-        //router.render(new Login());
+        // router.render(new Login());
         
         //router.render(new MovieCardList(list));
         
-        router.render(new HomeView());
+        //router.render(new HomeView(new User("tony")));
+        
+        router.render(new gui.movie.MovieView());
 
 	}
+
 	
 	public static void main(String[] args) {
 		launch(args);

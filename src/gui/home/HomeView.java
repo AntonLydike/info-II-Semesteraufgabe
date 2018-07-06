@@ -5,16 +5,21 @@ import java.util.ArrayList;
 
 import data.Movie;
 import data.Person;
+import data.User;
+import data.WatchListItem;
 import gui.Renderable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 public class HomeView implements Renderable {
 
-	private ArrayList<Movie> list;
+	private User user;
+	private ArrayList<WatchListItem> list;
 	
-	public HomeView() {
-		list = new ArrayList<Movie>();
+	public HomeView(User user) {
+		this.user = user;
+		// list is now accessed by user.getMovieList()
+		list = new ArrayList<WatchListItem>();
         
         Movie m = new Movie("/test");
         
@@ -28,7 +33,7 @@ public class HomeView implements Renderable {
         		"\n" + 
         		"Doloremque harum sed rerum fuga. Aliquid et ut dolore ab accusantium. Perferendis velit architecto mollitia excepturi.");
         
-        m.setDirector(new Person("Gareth Edwards (V)", "https://resizing.flixster.com/uFnQG3CAZiE8Zt9XdudZlgxciFo=/50x50/v1.bjs3NTEwNjM7ajsxNzczODsxMjAwOzU0MDs3MjA", "/nopeasd", "He's a good guy"));
+        m.setDirector(new Person("Gareth Edwards (V)", "https://resizing.flixster.com/uFnQG3CAZiE8Zt9XdudZlgxciFo=/50x50/v1.bjs3NTEwNjM7ajsxNzczODsxMjAwOzU0MDs3MjA", "/nopeasd"));
         
         m.setImdbRating((byte) 55);
         m.setMcRating((byte) 63);
@@ -38,7 +43,7 @@ public class HomeView implements Renderable {
         m.setYear(2008);
         m.setTitle("Rogue One: A Star Wars Story");
         
-        list.add(m);
+        list.add(new WatchListItem(m));
         m = new Movie("/test2");
         
         m.setDescription("The epic story of aut quos architecto omnis ea. Praesentium sed et quis id quos dolor. Rerum ut eius aliquam autem quia.\n" + 
@@ -51,7 +56,7 @@ public class HomeView implements Renderable {
         		"\n" + 
         		"Doloremque harum sed rerum fuga. Aliquid et ut dolore ab accusantium. Perferendis velit architecto mollitia excepturi.");
         
-        m.setDirector(new Person("Taika Waititi", "https://resizing.flixster.com/uFnQG3CAZiE8Zt9XdudZlgxciFo=/50x50/v1.bjs3NTEwNjM7ajsxNzczODsxMjAwOzU0MDs3MjA", "/nope", "He's a good guy"));
+        m.setDirector(new Person("Taika Waititi", "https://resizing.flixster.com/uFnQG3CAZiE8Zt9XdudZlgxciFo=/50x50/v1.bjs3NTEwNjM7ajsxNzczODsxMjAwOzU0MDs3MjA", "/nope"));
         
         m.setImdbRating((byte) 88);
         m.setMcRating((byte) 76);
@@ -61,7 +66,7 @@ public class HomeView implements Renderable {
         m.setYear(2017);
         m.setTitle("Thor: Ragnarok");
         
-        list.add(m);
+        list.add(new WatchListItem(m, (byte) 80, true));
 	}
 
 	@Override

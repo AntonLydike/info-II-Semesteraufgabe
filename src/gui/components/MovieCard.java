@@ -3,29 +3,32 @@ package gui.components;
 import java.io.IOException;
 import gui.Renderable;
 import data.Movie;
+import data.WatchListItem;
+import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class MovieCard implements Renderable {
-	private Movie movie;
+	private WatchListItem item;
 	
-	public MovieCard(Movie m) {
-		movie = m;
+	public MovieCard(WatchListItem m) {
+		item = m;
 	}
 	
-	public Movie getMovie() {
-		return movie;
+	public WatchListItem getWatchListItem() {
+		return item;
 	}
 	
 	@Override
 	public Node getView() {
 		FXMLLoader loader = new FXMLLoader();
         try {
-        	loader.setController(new MovieCardController(movie));
+        	loader.setController(new MovieCardController(item));
 			loader.setLocation(getClass().getResource("MovieCard.fxml"));
 			Node node = loader.<Node>load();
 			
@@ -39,6 +42,7 @@ public class MovieCard implements Renderable {
 
 class MovieCardController {
 	private Movie movie;
+	private WatchListItem item;
 	
 	@FXML
 	public Label title;
@@ -50,9 +54,13 @@ class MovieCardController {
 	public HBox rating;
 	@FXML
 	public ImageView cover;
+	@FXML public ImageView checkmark;
+	@FXML public VBox card_root;
 	
-	public MovieCardController(Movie m) {
-		movie = m;
+	
+	public MovieCardController(WatchListItem m) {
+		item = m;
+		movie = m.getMovie();
 	}
 	
 	@FXML
@@ -63,6 +71,9 @@ class MovieCardController {
 		year.setText("(" + String.valueOf(m.getYear()) + ")");
 		director.setText(m.getDirector().getName());
 
+		if (item.isWatched()) {
+			card_root.getStyleClass().add("movie-checked");
+		}
 		
 		// do lot's of calculating to compile all the ratings together...
 		byte ratings[] = {m.getImdbRating(), m.getRtaRating(), m.getRtRating(), m.getMcRating()};
@@ -123,7 +134,5 @@ class MovieCardController {
 				cover.setSmooth(true);
 			}
 		}).start();
-		
-		
 	}
 }

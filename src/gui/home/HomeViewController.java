@@ -3,6 +3,7 @@ package gui.home;
 import java.util.ArrayList;
 
 import data.Movie;
+import data.WatchListItem;
 import gui.movieList.MovieCardList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.BorderPane;
@@ -16,7 +17,7 @@ public class HomeViewController {
 		
 	}
 	
-	public void displayMovieList(ArrayList<Movie> list) {
+	public void displayMovieList(ArrayList<WatchListItem> list) {
 		main.setCenter((new MovieCardList(list)).getView());
 	}
 

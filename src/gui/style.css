@@ -8,6 +8,10 @@
  * 
  */
 
+.background {
+	-fx-background-color: #0e1f2b;
+}
+
 #root {
 	-fx-font-family: "Open Sans";
 	-fx-text-fill: #eeeeee;
@@ -99,3 +103,9 @@ TextField.large {
 .movie-card {
 	-fx-background-color: #444;
 }
+
+.movie-card.movie-checked {
+	-fx-background-color: #0d4420;
+}
+
+

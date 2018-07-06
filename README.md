@@ -27,7 +27,12 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
  - Signup
  - Adding new movie
  - Home
+ 	- Events verkabeln
+ 	- Suche implementieren
  - Movie details view
+ - MovieCard
+ 	- Click event verkabeln (set checked)
+ 	- DoubleClick verkabeln (open Movie detail view)
  
 **Methods in the persistence layer**
  - getWatchlist(user)

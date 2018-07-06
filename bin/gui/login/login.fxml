@@ -32,12 +32,12 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <Label styleClass="title" text="Login" />
+                        <Label fx:id="title" styleClass="title" text="Login" GridPane.columnSpan="2" />
                         <Label text="Username:" GridPane.rowIndex="1" />
                         <Label text="Password:" GridPane.rowIndex="2" />
                         <TextField fx:id="username" onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <PasswordField fx:id="password" onAction="#btnClick" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Button mnemonicParsing="false" onAction="#btnClick" text="LOGIN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
+                        <Button fx:id="login" mnemonicParsing="false" onAction="#btnClick" text="LOGIN" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3" />
                      </children>
                      <opaqueInsets>
                         <Insets />
@@ -50,10 +50,7 @@
       </HBox>
       <HBox alignment="BOTTOM_RIGHT" minHeight="33.0" prefHeight="33.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button mnemonicParsing="false" styleClass="secondary" text="REGISTER">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <Button fx:id="register" mnemonicParsing="false" onAction="#registerSwitch" styleClass="secondary" text="REGISTER">
             </Button>
          </children>
          <padding>

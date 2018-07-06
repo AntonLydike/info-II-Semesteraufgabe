@@ -13,9 +13,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import exception.APIRequestException;
 
+/**
+ * Api to connect to an online scraper of rotten tomatoes and IMDB. Written by myslef, using only the php library Simple HTML Dom: http://simplehtmldom.sourceforge.net/
+ * @author anton
+ *
+ */
 public class MovieInfoApi {
 
+	// The api requires an access token. This one is hardcoded
 	private final String accessToken = "e9b5jaxsqetwdk2iasd1nrr9x5nxii8r";
+	// url to scraper
 	private final String baseUrl = "https://antonlydike.de/scraper/";
 	
 	/**

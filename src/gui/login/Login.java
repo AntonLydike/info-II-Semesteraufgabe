@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -38,7 +39,13 @@ class LoginController {
 	@FXML TextField username;
 	@FXML PasswordField password;
 	@FXML Label error;
+	@FXML Label title;
+	@FXML Button login;
+	@FXML Button register;
 
+	// since login and register is handled by the same view, keep track what is what
+	private boolean isLoginView = true;
+	
 	Router router = Router.instance();
 	UserService userService = new UserService();
 
@@ -61,6 +68,21 @@ class LoginController {
 		}
 
 		// for testing
+	}
+	
+	@FXML
+	private void registerSwitch(ActionEvent e) {
+		if (isLoginView) {
+			title.setText("Register");
+			login.setText("REGISTER");
+			register.setText("LOGIN");
+		} else {
+			title.setText("Login");
+			register.setText("REGISTER");
+			login.setText("LOGIN");
+			
+		}
+		isLoginView = !isLoginView;
 	}
 	
 }

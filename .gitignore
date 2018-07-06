@@ -29,3 +29,5 @@ bin/*
 *.iml
 
 **/bin/**
+
+!java-json.rar

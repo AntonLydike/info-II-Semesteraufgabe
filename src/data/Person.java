@@ -9,18 +9,16 @@ public class Person implements Comparable<Person>{
 	private String name;
 	private String imageURL;
 	private String rtPath; // path on rotten tomatoes, primary ID
-	private String bio;
 	
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Person(String name, String imageURL, String rtPath, String bio) {
+	public Person(String name, String imageURL, String rtPath) {
 		super();
 		this.name = name;
 		this.imageURL = imageURL;
 		this.rtPath = rtPath;
-		this.bio = bio;
 	}
 
 	public String getName() {
@@ -45,14 +43,6 @@ public class Person implements Comparable<Person>{
 
 	public void setRtPath(String rtPath) {
 		this.rtPath = rtPath;
-	}
-
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String bio) {
-		this.bio = bio;
 	}
 
 	// compare only by rotten tomatoes path

@@ -27,6 +27,10 @@ public class User {
 		watchlist.remove(new WatchListItem(m));
 	}
 	
+	public ArrayList<WatchListItem> getMovieList() {
+		return watchlist;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
