@@ -108,4 +108,22 @@ TextField.large {
 	-fx-background-color: #0d4420;
 }
 
+.actor-container Label {
+	-fx-padding: 0;
+}
 
+.pointer {
+	-fx-cursor: hand;
+}
+
+ScrollPane,
+ScrollPane > .viewport,
+#searchResults {
+	-fx-focus-color: transparent;
+	-fx-background-color:transparent;
+}
+
+#searchScroll {
+	-fx-padding: 0px;
+	-fx-margin: 0;
+}
