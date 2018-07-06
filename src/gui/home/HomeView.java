@@ -21,7 +21,7 @@ public class HomeView implements Renderable {
 		// list is now accessed by user.getMovieList()
 		list = new ArrayList<WatchListItem>();
         
-        Movie m = new Movie("/test");
+        Movie m = new Movie("/m/rogue_one_a_star_wars_story");
         
         m.setDescription("The epic story of aut quos architecto omnis ea. Praesentium sed et quis id quos dolor. Rerum ut eius aliquam autem quia.\n" + 
         		"\n" + 
@@ -44,7 +44,7 @@ public class HomeView implements Renderable {
         m.setTitle("Rogue One: A Star Wars Story");
         
         list.add(new WatchListItem(m));
-        m = new Movie("/test2");
+        m = new Movie("/m/thor_ragnarok_2017");
         
         m.setDescription("The epic story of aut quos architecto omnis ea. Praesentium sed et quis id quos dolor. Rerum ut eius aliquam autem quia.\n" + 
         		"\n" + 
@@ -74,9 +74,9 @@ public class HomeView implements Renderable {
 		FXMLLoader loader = new FXMLLoader();
         try {
         	//loader.setController(new LoginController());
-        	HomeViewController hvc = new HomeViewController();
+        	HomeViewController hvc = new HomeViewController(user);
         	loader.setController(hvc);
-			loader.setLocation(getClass().getResource("HomeView.fxml"));
+			loader.setLocation(getClass().getResource("/gui/home/HomeView.fxml"));
 			Node node = loader.<Node>load();
 			hvc.displayMovieList(list);
 	        return node;

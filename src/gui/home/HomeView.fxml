@@ -11,20 +11,15 @@
    <top>
       <HBox alignment="CENTER" prefWidth="200.0" spacing="16.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+            <ImageView fitHeight="48.0" fitWidth="48.0" onMouseClicked="#goToAddView" pickOnBounds="true" preserveRatio="true" smooth="true" styleClass="pointer">
                <image>
-                  <Image url="@../images/home.png" />
+                  <Image url="@../images/add.png" />
                </image>
             </ImageView>
             <TextField styleClass="large" HBox.hgrow="ALWAYS" />
-            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true">
+            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true" styleClass="pointer">
                <image>
                   <Image url="@../images/search.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true">
-               <image>
-                  <Image url="@../images/add.png" />
                </image>
             </ImageView>
          </children>
