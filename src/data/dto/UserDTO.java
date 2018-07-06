@@ -11,8 +11,8 @@ public class UserDTO implements Entity {
 
     @Col(name="id")
     private Integer id;
-    @Col(name="name")
-    private String name;
+    @Col(name="username")
+    private String username;
     @Col(name="password")
     private String password;
 
@@ -24,12 +24,12 @@ public class UserDTO implements Entity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
