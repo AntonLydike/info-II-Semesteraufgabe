@@ -24,7 +24,7 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
             ArrayList<WatchListDTO> results =  executeQuery(WatchListDTO.class, WatchListConstants.SELECT_WATCHLIST_FOR_USERID, Arrays.asList(userId));
             for(WatchListDTO result : results) {
                 // Director/Person
-                Person director = new Person(result.getDirectorName(), result.getDirectorImageUrl(), result.getDirectorRtPath(), result.getDirectorBio());
+                Person director = new Person(result.getDirectorName(), result.getDirectorRtPath());
                 // Movie
                 Movie movie = new Movie(result.getMovieRtPath(), result.getMoviePosterUrl(), result.getMovieTitle(), result.getMovieDescription(), director, result.getMovieImdbRating().byteValue(),
                         result.getMovieMcRating().byteValue(), result.getMovieRtRating().byteValue(), result.getMovieRtaRating().byteValue(), result.getMovieYear());

@@ -1,8 +1,30 @@
 package data.dto;
 
-public class PersonDTO {
+import data.common.Col;
+import data.common.Entity;
+
+
+public class PersonDTO implements Entity {
+    @Col(name="name")
     private String name;
-    private String imageURL;
+
+    @Col(name="rtPath")
     private String rtPath; // path on rotten tomatoes, primary ID
-    private String bio;
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRtPath() {
+        return rtPath;
+    }
+
+    public void setRtPath(String rtPath) {
+        this.rtPath = rtPath;
+    }
 }
