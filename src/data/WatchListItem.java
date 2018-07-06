@@ -1,7 +1,5 @@
 package data;
 
-import data.common.Entity;
-
 public class WatchListItem implements Comparable<WatchListItem> {
 
 	private Movie movie;
