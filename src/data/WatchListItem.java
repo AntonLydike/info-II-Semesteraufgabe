@@ -54,7 +54,7 @@ public class WatchListItem implements Comparable<WatchListItem> {
 	public boolean setWatched(boolean watched) {
 		this.watched = watched;
 		try {
-			service.setWatched(Router.instance().getCurrentUser().getId(), movie);
+			service.setWatched(Router.instance().getCurrentUser().getId(), movie, watched);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;

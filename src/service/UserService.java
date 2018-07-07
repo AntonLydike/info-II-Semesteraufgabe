@@ -77,9 +77,9 @@ public class UserService {
         return userDao.removeWatchListItem(userId, movieDTO.getId());
     }
 
-    public boolean setWatched(int userId, Movie movie) throws SQLException {
+    public boolean setWatched(int userId, Movie movie, boolean watched) throws SQLException {
         MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
-        return userDao.setWatchListItemWatched(userId, movieDTO.getId());
+        return userDao.setWatchListItemWatched(userId, movieDTO.getId(), watched);
     }
 
     public boolean setRating(int userId, Movie movie, int rating) throws SQLException {
