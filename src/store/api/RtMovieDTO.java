@@ -29,25 +29,54 @@ public class RtMovieDTO {
 		try {
 			this.path = path;
 			director = new Person(obj.getJSONObject("director").getString("name"), "", obj.getJSONObject("director").getString("url"));
-			title = obj.getString("title");
-			description = obj.getString("description");
-			imageURL = obj.getString("image");
+			title = getString(obj, "title");
+			description = getString(obj, "description");
+			imageURL = getString(obj, "image");
 			
-			score = (byte) obj.getJSONObject("score").getInt("critic");
-			audienceScore = (byte) obj.getJSONObject("score").getInt("audience");
+			score = (byte) getInt(obj.getJSONObject("score"), "critic");
+			audienceScore = (byte) getInt(obj.getJSONObject("score"), "audience");
 			
 			actors = new ArrayList<Actor>();
 			
 			for (Object o: obj.getJSONArray("cast")) {
 				JSONObject j = (JSONObject) o;
 				actors.add(new Actor(new Person(
-							j.getString("name"),
-							j.getString("picture"),
-							j.getString("url")
-						), j.getString("role")));
+							getString(j, "name"),
+							getString(j, "picture"),
+							getString(j, "url")
+						), getString(j, "role")));
 			}	
 		} catch(Exception e) {
+			System.err.println(obj.toString(2));
 			throw new APIRequestException("[RtMovieDTO construction] Error while constructing: " + e.getMessage(), e);
+		}
+	}
+	
+	/**
+	 * Gets Integer at field from object or -1 if non existent
+	 * @param obj JSONObject source
+	 * @param field The field to look at
+	 * @return integer at field or -1
+	 */
+	private int getInt(JSONObject obj, String field) {
+		if (obj.has(field) && !obj.isNull(field)) {
+			return obj.getInt(field);
+		} else {
+			return -1;
+		}
+	}
+	
+	/**
+	 * Gets String at field from object or -1 if non existent
+	 * @param obj JSONObject source
+	 * @param field The field to look at
+	 * @return integer at field or -1
+	 */
+	private String getString(JSONObject obj, String field) {
+		if (obj.has(field) && !obj.isNull(field)) {
+			return obj.getString(field);
+		} else {
+			return "";
 		}
 	}
 

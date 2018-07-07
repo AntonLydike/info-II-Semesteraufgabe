@@ -125,4 +125,20 @@ public class Movie implements Comparable<Movie>{
 	public boolean equals(Movie a) {
 		return a.compareTo(this) == 0;
 	}
+
+	@Override
+	public String toString() {
+		return "Movie(" + rtPath + "): {"
+				+ "\n  cover: " + posterURL
+				+ "\n  title: " + title
+				+ "\n  year: " + year
+				+ "\n  description: " + description.substring(0, 20) + "..."
+				+ "\n  director: " + director.getName()
+				+ "\n  imdb: " + imdbRating
+				+ "\n  mc: " + mcRating
+				+ "\n  rt: " + rtRating
+				+ "\n  rta: " + rtaRating 
+				+ "\n}";
+	}
+	
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import data.User;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
@@ -8,6 +9,7 @@ public class Router {
 
 	private Stage stage;
 	private Node curr;
+	private User currentUser = null;
 	
 	private Router(Stage s) {
 		this.stage = s;
@@ -29,6 +31,14 @@ public class Router {
 			throw new RuntimeException("Router isn't initialized yet!");
 		}
 		return instance;
+	}
+	
+	public void setCurrentUser(User u) {
+		currentUser = u;
+	}
+	
+	public User getCurrentUser() {
+		return currentUser;
 	}
 	
 	public void render(Renderable r) {

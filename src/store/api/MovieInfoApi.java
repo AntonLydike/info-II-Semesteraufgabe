@@ -121,8 +121,8 @@ public class MovieInfoApi {
 	 * @return Return a JSONObject containing information about that Movie
 	 * @throws APIRequestException
 	 */
-	public JSONObject imdbInfo(String name) throws APIRequestException {
-		return getJsonAt(buildQueryString("imdb", "info", "q=" + encodeURIcomponent(name)), "[imdb/info?q=" + name + "]");
+	public ImdbMovieDTO imdbInfo(String name) throws APIRequestException {
+		return new ImdbMovieDTO(getJsonAt(buildQueryString("imdb", "info", "q=" + encodeURIcomponent(name)), "[imdb/info?q=" + name + "]"));
 	}
 	
 }

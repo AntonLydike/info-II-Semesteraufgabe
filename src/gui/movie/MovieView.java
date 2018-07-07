@@ -6,6 +6,9 @@ import data.WatchListItem;
 import exception.APIRequestException;
 import gui.LayoutController;
 import gui.Renderable;
+import gui.Router;
+import gui.components.Loader;
+import gui.home.HomeView;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -107,7 +110,13 @@ class MovieViewController {
 		HBox root = new HBox();
 		VBox vb = new VBox();
 		Label role = new Label("as " + a.role);
-		ImageView img = new ImageView(a.person.getImageURL());
+		ImageView img = new ImageView(Loader.getImage());
+		(new Thread() {
+			public void run() {
+				Image prelaoded = new Image(a.person.getImageURL());
+				img.setImage(prelaoded);
+			}
+		}).start();
 		
 		img.setFitHeight(50);
 		img.setFitWidth(50);
@@ -151,7 +160,7 @@ class MovieViewController {
 		});
 		
 		back.setOnMouseClicked((e) -> {
-			// TODO implement
+			Router.instance().render(new HomeView());
 		});
 		
 		loaded = true;

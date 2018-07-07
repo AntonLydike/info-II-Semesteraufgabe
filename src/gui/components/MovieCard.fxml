@@ -11,12 +11,11 @@
    <children>
       <StackPane>
          <children>
-            <ImageView fitHeight="248.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="cover" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/loader.dark.gif" />
                </image>
             </ImageView>
-            <ImageView fx:id="cover" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </StackPane>
       <FlowPane maxWidth="180.0" prefWidth="180.0" prefWrapLength="160.0" VBox.vgrow="NEVER">

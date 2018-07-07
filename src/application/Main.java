@@ -35,13 +35,14 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         
+        router.setCurrentUser(new User(1, "tony"));
         
         
         // router.render(new Login());
         
         //router.render(new MovieCardList(list));
         
-        router.render(new HomeView(new User(1, "tony")));
+        router.render(new HomeView());
         
         //router.render(new gui.movie.MovieView());
 

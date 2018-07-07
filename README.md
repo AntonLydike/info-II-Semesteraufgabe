@@ -29,7 +29,7 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
  - [ ] Home
  	- [x] Events verkabeln
  	- [ ] Suche implementieren
- - [ ] Movie details view ✓
+ - [ ] Movie details view
  	- [ ] Implement rating / deleting from watchlist
  - [x] MovieCard
  	- [x] Click event verkabeln (set checked)

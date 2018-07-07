@@ -29,8 +29,10 @@ public class User {
 		return watchlist;
 	}
 
-	public void setWatchlist(ArrayList<WatchListItem> watchlist) {
-		this.watchlist = watchlist;
+	public void addToWatchlist(Movie m) {
+		WatchListItem wli = new WatchListItem(m);
+		watchlist.add(wli);
+		// UserService.addToWatchlist(m);
 	}
 
 	public int getId() {

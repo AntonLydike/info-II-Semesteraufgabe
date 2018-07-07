@@ -16,7 +16,7 @@
                   <Image url="@../images/back.light.png" />
                </image>
             </ImageView>
-            <TextField fx:id="searchBar" onAction="#search" styleClass="large" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="searchBar" onAction="#search" promptText="Search for a movie on rotten tomatoes" styleClass="large" HBox.hgrow="ALWAYS" />
             <ImageView fx:id="searchbtn" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true" styleClass="pointer">
                <image>
                   <Image url="@../images/search.png" />
@@ -31,17 +31,9 @@
    <center>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <ScrollPane fx:id="searchScroll" fitToHeight="true" hbarPolicy="NEVER" layoutX="78.0" prefViewportWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="0.0">
+            <ScrollPane fx:id="searchScroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="78.0" prefViewportWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <VBox fx:id="searchResults" layoutX="78.0" spacing="8.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <HBox>
-                           <children>
-                              <Label text="Label" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="searchResults" layoutX="78.0" spacing="8.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="0.0" />
                </content>
             </ScrollPane>
          </children>

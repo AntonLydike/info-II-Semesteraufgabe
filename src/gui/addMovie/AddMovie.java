@@ -2,13 +2,16 @@ package gui.addMovie;
 
 import java.io.IOException;
 
+import data.Movie;
 import data.User;
+import data.WatchListItem;
 import exception.APIRequestException;
 import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
 import gui.components.Loader;
 import gui.home.HomeView;
+import gui.movie.MovieView;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,7 +23,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import store.api.ImdbMovieDTO;
 import store.api.MovieInfoApi;
+import store.api.RtMovieDTO;
 import store.api.RtQueryDTO;
 import store.api.RtQueryMovieItem;
 
@@ -70,7 +75,7 @@ class AddMovieController {
 	
 	@FXML public void initialize() {
 		backbtn.setOnMouseClicked((e) -> {
-			Router.instance().render(new HomeView(user));
+			Router.instance().render(new HomeView());
 		});
 		searchbtn.setOnMouseClicked((e) -> {
 			search(null);
@@ -153,7 +158,89 @@ class AddMovieController {
 			
 			root.getChildren().add(img);
 			root.getChildren().add(vb);
+			
+			root.setOnMouseClicked((e) -> {
+				loader(true);
+				gatherMovieInformation(item);
+			});
+			
 			searchResults.getChildren().add(root);
 		}
+	}
+	
+	private void gatherMovieInformation(RtQueryMovieItem dto) {
+		Movie movie = new Movie(dto.getUrl());
+		movie.setDescription("");
+		movie.setTitle(dto.getName());
+		movie.setYear(dto.getYear());
+
+		// spin up thread that spins up two new threads and waits for them to finish. these two threads will race each other to get Movie Information via api
+		(new Thread() {
+			public void run() {
+				Thread rtThread = new Thread() {
+					public void run() {
+						MovieInfoApi api = new MovieInfoApi();
+						try {
+							RtMovieDTO info = api.rtInfo(dto.getUrl());
+							movie.setDirector(info.getDirector());
+							movie.setRtRating(info.getScore());
+							movie.setRtaRating(info.getAudienceScore());
+							movie.setPosterURL(info.getImageURL());
+							// only set longer description
+							if (movie.getDescription().length() <  info.getDescription().length()) {
+								movie.setDescription(info.getDescription());
+							}
+						} catch (APIRequestException e) {
+							Platform.runLater(() -> {
+								LayoutController.error(e.getMessage());
+								e.printStackTrace();
+							});
+						}
+					}
+				};
+				
+				Thread imdbThread = new Thread() {
+					public void run() {
+						MovieInfoApi api = new MovieInfoApi();
+						try {
+							ImdbMovieDTO info = api.imdbInfo(dto.getName() + " " + dto.getYear());
+							movie.setImdbRating(info.getImdbRating());
+							movie.setMcRating(info.getMcRating());
+							// get the longer description text
+							String newDescr = info.getDescription().length() > info.getStoryline().length() ? info.getDescription() : info.getStoryline();
+							
+							// only set new description, if it's longer
+							if (movie.getDescription().length() < newDescr.length()) {
+								movie.setDescription(newDescr);
+							}
+						} catch (APIRequestException e) {
+							Platform.runLater(() -> {
+								LayoutController.error(e.getMessage());
+								e.printStackTrace();
+							});
+						}
+					}
+				};
+				
+				rtThread.start();
+				imdbThread.start();
+				
+				try {
+					rtThread.join();
+					imdbThread.join();
+				} catch (InterruptedException e) {
+					// Nothing to do here
+				}
+				
+				System.out.println(movie.toString());
+				
+				Platform.runLater(() -> {
+					user.addToWatchlist(movie);
+					WatchListItem wli = new WatchListItem(movie);
+					// USer.addWatchListItem(wli);
+					Router.instance().render(new MovieView(wli));
+				});
+			}
+		}).start();		
 	}
 }
