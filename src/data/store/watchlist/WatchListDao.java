@@ -6,20 +6,28 @@ import data.WatchListItem;
 import data.dto.WatchListDTO;
 import data.store.common.BaseDao;
 import exception.LoadWatchlistException;
-import service.WatchListContainer;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class WatchListDao extends BaseDao<WatchListDTO> {
 
+    private static WatchListDao unique = null;
 
-    public WatchListDao() throws SQLException, ClassNotFoundException {
+    private WatchListDao() throws SQLException, ClassNotFoundException {
         super(WatchListDTO.class, "watchlist");
     }
 
-    public void load(WatchListContainer container, int userId) throws LoadWatchlistException{
+    public static WatchListDao instance() throws SQLException, ClassNotFoundException{
+        if(unique == null)
+            unique = new WatchListDao();
+        return unique;
+    }
+
+    public List<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
+        List<WatchListItem> watchListItems = new ArrayList<>();
         try {
             ArrayList<WatchListDTO> results =  executeQuery(WatchListDTO.class, WatchListConstants.SELECT_WATCHLIST_FOR_USERID, Arrays.asList(userId));
             for(WatchListDTO result : results) {
@@ -29,14 +37,21 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
                 Movie movie = new Movie(result.getMovieRtPath(), result.getMoviePosterUrl(), result.getMovieTitle(), result.getMovieDescription(), director, result.getMovieImdbRating().byteValue(),
                         result.getMovieMcRating().byteValue(), result.getMovieRtRating().byteValue(), result.getMovieRtaRating().byteValue(), result.getMovieYear());
 
-                boolean watched = result.getLastWatched() != null;
+                boolean watched = result.getWatched() == null || result.getWatched().isEmpty() ? false : true;
                 // watchlistitem
                 WatchListItem item = new WatchListItem(movie, result.getPesonalRating().byteValue(), watched);
-                container.link(item);
+                watchListItems.add(item);
             }
+            return watchListItems;
         } catch (SQLException e) {
             e.printStackTrace();
             throw new LoadWatchlistException("Could not load watchlist.");
         }
     }
+
+    public boolean watchListItemForUserExists(int userId, int movieId) throws SQLException{
+        List<WatchListDTO> results = executeQuery(WatchListDTO.class, WatchListConstants.SEARCH_BY_USER_AND_MOVIE_ID, Arrays.asList(userId, movieId));
+        return results.size() > 0;
+    }
+
 }

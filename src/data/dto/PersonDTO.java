@@ -5,6 +5,9 @@ import data.common.Entity;
 
 
 public class PersonDTO implements Entity {
+    @Col(name="id")
+    private Integer id;
+
     @Col(name="name")
     private String name;
 
@@ -25,5 +28,13 @@ public class PersonDTO implements Entity {
 
     public void setRtPath(String rtPath) {
         this.rtPath = rtPath;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
