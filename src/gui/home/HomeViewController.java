@@ -1,5 +1,6 @@
 package gui.home;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
@@ -8,6 +9,8 @@ import java.util.stream.Collectors;
 import data.Movie;
 import data.User;
 import data.WatchListItem;
+import exception.LoadWatchlistException;
+import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
 import gui.addMovie.AddMovie;
@@ -40,8 +43,14 @@ public class HomeViewController {
 		this.user = user;
 		
 		if (user.getWatchlist().isEmpty()) {
-			WatchListService usv = new WatchListService();
-			user.setWatchList(usv.getWatchListForUser(user.getId()));	
+			try {
+				WatchListService usv = new WatchListService();
+				user.setWatchList(usv.getWatchListForUser(user.getId()));
+			} catch (LoadWatchlistException | ClassNotFoundException | SQLException e) {
+				System.err.println("Could't get watchlist!");
+				e.printStackTrace();
+				LayoutController.error("Couldn't fetch your watchlist: " + e.getMessage());
+			}	
 		}
 	}
 	

@@ -1,8 +1,7 @@
 package gui.login;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
+import java.sql.SQLException;
 import data.User;
 import exception.LoginFailedException;
 import exception.RegisterFailedException;
@@ -10,7 +9,6 @@ import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
 import gui.home.HomeView;
-import gui.movieList.MovieCardList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,16 +46,24 @@ class LoginController {
 	// since login and register is handled by the same view, keep track what is what
 	private boolean isLoginView = true;
 	
-	UserService userService = new UserService();
+	UserService userService;
+	
+	public LoginController () {
+		try {
+			userService = new UserService();
+		} catch (ClassNotFoundException | SQLException e) {
+			System.err.println("Couldn't create User Service! Errors ahead!");
+			e.printStackTrace();
+		}
+	}
 
 	@FXML
 	private void btnClick(ActionEvent e) {
-		error.setText("");
 		// register first (if necessary)
 		if (!isLoginView) {
 			try {
 				if (!userService.register(username.getText().trim(), password.getText())) {
-					LayoutController.error("Couldn't register!");
+					LayoutController.error("This user is already registered!");
 					return;
 				}
 			} catch (RegisterFailedException e1) {

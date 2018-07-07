@@ -1,5 +1,7 @@
 package data;
 
+import java.sql.SQLException;
+
 /*
  * A user Objects holds the watchlist, username and maybe some other information, idk
  */
@@ -12,25 +14,42 @@ public class User {
 	private ArrayList<WatchListItem> watchlist;
 	private int id;
 	private String username;
-	private UserService service = new UserService();
+	private UserService service;
 	
 	public User(int id, String username) {
 		this.username = username;
 		this.id = id;
 		watchlist = new ArrayList<WatchListItem>();
+		try {
+			service = new UserService();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.err.println("Couldn't load service! Errors ahead!");
+			e.printStackTrace();
+		}
 	}
 
-	public void unlinkWatchListItem(WatchListItem wli) {
+	public boolean unlinkWatchListItem(WatchListItem wli) {
 		watchlist.removeIf((itm) -> itm.equals(wli));
-		service.removeFromWatchlist(id, wli.getMovie());
+		try {
+			service.removeFromWatchlist(id, wli.getMovie());
+		} catch (SQLException e) {
+			return false;
+		}
+		return true;
 	}
 	
-	public void linkMovie(Movie m) {
+	public boolean linkMovie(Movie m) {
 		WatchListItem item = new WatchListItem(m);
 		if (!watchlist.contains(item)) {
-			watchlist.add(item);
-			service.addToWatchList(id, m);
+			watchlist.add(0, item);
+			try {
+				service.addToWatchList(id, m);
+			} catch (SQLException e) {
+				unlinkWatchListItem(new WatchListItem(m));
+				return false;
+			}
 		}
+		return true;
 	}
 	
 	public boolean setWatchList(ArrayList<WatchListItem> list) {

@@ -1,9 +1,7 @@
 package application;
 	
 import java.io.IOException;
-import data.User;
 import gui.Router;
-import gui.home.HomeView;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
@@ -11,7 +9,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import gui.login.Login;
-import gui.movieList.MovieCardList;
 
 public class Main extends Application {
 	@Override
@@ -35,17 +32,7 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
         
-        router.setCurrentUser(new User(1, "tony"));
-        
-        
-        // router.render(new Login());
-        
-        //router.render(new MovieCardList(list));
-        
-        router.render(new HomeView());
-        
-        //router.render(new gui.movie.MovieView());
-
+        router.render(new Login());
 	}
 
 	
