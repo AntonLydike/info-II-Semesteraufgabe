@@ -10,6 +10,6 @@ public class WatchListConstants {
             " FROM watchlist" +
             " JOIN movies on movies.id=watchlist.movie_id " +
             " JOIN persons on persons.id = movies.director " +
-            " WHERE user_id = ? ";
+            " WHERE user_id = ? ORDER BY UNIX_TIMESTAMP(watchlist.createdAt) DESC";
     public static final String SEARCH_BY_USER_AND_MOVIE_ID = "SELECT * from watchlist where user_id = ? AND movie_id = ?";
 }
