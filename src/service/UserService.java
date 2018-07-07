@@ -8,6 +8,7 @@ import data.dto.UserDTO;
 import data.store.movie.MovieDao;
 import data.store.person.PersonDao;
 import data.store.user.UserDao;
+import data.store.watchlist.WatchListDao;
 import exception.LoginFailedException;
 import exception.RegisterFailedException;
 import gui.LayoutController;
@@ -19,6 +20,7 @@ public class UserService {
     UserDao userDao;
     MovieDao movieDao;
     PersonDao personDao;
+    WatchListDao watchListDao;
     LayoutController layout = LayoutController.instance();
 
     public UserService() {
@@ -26,6 +28,7 @@ public class UserService {
             userDao = UserDao.instance();
             movieDao = MovieDao.instance();
             personDao = PersonDao.instance();
+            watchListDao = WatchListDao.instance();
         } catch (SQLException e) {
             layout.error("Could not connect to Database! For more details see the log file or contact the administrator.");
             e.printStackTrace();
@@ -63,7 +66,9 @@ public class UserService {
         try {
             PersonDTO director = personDao.upsert(movie.getDirector());
             MovieDTO movieDTO = movieDao.upsert(movie, director.getId());
-            userDao.addoWatchListItem(userId, movieDTO.getId());
+            if (!watchListDao.watchListItemForUserExists(userId, movieDTO.getId()))
+                userDao.addoWatchListItem(userId, movieDTO.getId());
+            else layout.error("The movie is already in your personal watchlist.");
 
         } catch (SQLException e) {
             e.printStackTrace();

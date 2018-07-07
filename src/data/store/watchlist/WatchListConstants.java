@@ -11,4 +11,5 @@ public class WatchListConstants {
             " JOIN movies on movies.id=watchlist.movie_id " +
             " JOIN persons on persons.id = movies.director " +
             " WHERE user_id = ? ";
+    public static final String SEARCH_BY_USER_AND_MOVIE_ID = "SELECT * from watchlist where user_id = ? AND movie_id = ?";
 }

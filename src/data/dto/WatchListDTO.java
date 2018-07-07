@@ -25,7 +25,7 @@ public class WatchListDTO implements Entity {
     private ZonedDateTime createdAt;
 
     @Col(name="watchlist.watched")
-    private Boolean watched;
+    private String watched;
 
     @Col(name="movies.title")
     private String movieTitle;
@@ -108,11 +108,11 @@ public class WatchListDTO implements Entity {
         this.createdAt = createdAt;
     }
 
-    public Boolean getWatched() {
+    public String getWatched() {
         return watched;
     }
 
-    public void setWatched(Boolean watched) {
+    public void setWatched(String watched) {
         this.watched = watched;
     }
 

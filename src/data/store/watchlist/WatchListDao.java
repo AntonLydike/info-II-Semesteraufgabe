@@ -37,8 +37,9 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
                 Movie movie = new Movie(result.getMovieRtPath(), result.getMoviePosterUrl(), result.getMovieTitle(), result.getMovieDescription(), director, result.getMovieImdbRating().byteValue(),
                         result.getMovieMcRating().byteValue(), result.getMovieRtRating().byteValue(), result.getMovieRtaRating().byteValue(), result.getMovieYear());
 
+                boolean watched = result.getWatched() == null || result.getWatched().isEmpty() ? false : true;
                 // watchlistitem
-                WatchListItem item = new WatchListItem(movie, result.getPesonalRating().byteValue(), result.getWatched());
+                WatchListItem item = new WatchListItem(movie, result.getPesonalRating().byteValue(), watched);
                 watchListItems.add(item);
             }
             return watchListItems;
@@ -48,8 +49,9 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
         }
     }
 
-    public boolean watchListItemForUserExists(int userId, int movieId) {
-        List<WatchListDTO> results = executeQuery(WatchListDTO.class, )
+    public boolean watchListItemForUserExists(int userId, int movieId) throws SQLException{
+        List<WatchListDTO> results = executeQuery(WatchListDTO.class, WatchListConstants.SEARCH_BY_USER_AND_MOVIE_ID, Arrays.asList(userId, movieId));
+        return results.size() > 0;
     }
 
 }
