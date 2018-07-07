@@ -23,7 +23,7 @@ public class WatchListService {
         watchListDao = WatchListDao.instance();
     }
 
-    public List<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
+    public ArrayList<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
         return watchListDao.getWatchListForUser(userId);
     }
 
