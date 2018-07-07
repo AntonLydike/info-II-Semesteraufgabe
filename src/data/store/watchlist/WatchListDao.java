@@ -4,6 +4,7 @@ import data.Movie;
 import data.Person;
 import data.WatchListItem;
 import data.dto.WatchListDTO;
+import data.dto.WatchListItemDTO;
 import data.store.common.BaseDao;
 import exception.LoadWatchlistException;
 
@@ -50,7 +51,7 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
     }
 
     public boolean watchListItemForUserExists(int userId, int movieId) throws SQLException{
-        List<WatchListDTO> results = executeQuery(WatchListDTO.class, WatchListConstants.SEARCH_BY_USER_AND_MOVIE_ID, Arrays.asList(userId, movieId));
+        List<WatchListItemDTO> results = (List<WatchListItemDTO>) executeAnyQuery(WatchListItemDTO.class, WatchListConstants.SEARCH_BY_USER_AND_MOVIE_ID, Arrays.asList(userId, movieId));
         return results.size() > 0;
     }
 

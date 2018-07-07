@@ -158,16 +158,19 @@ public class BaseDao<T extends Entity> {
 
     }
 
-
-    /**
-     * Executes any prepared SQL statement with provided parameters
-     * @param clazz identifies the class which will be returned
-     * @param sqlStatementant should be a prepared statement
-     * @param params contains all parameters for the prepared statement, the key represents the index for the statement
-     * @throws SQLException if a database access error occurs
-     * @return List of entites of class <code>clazz</code>
-     */
     protected ArrayList<T> executeQuery(Class<T> clazz, String sqlStatementant, List params) throws SQLException {
+        return (ArrayList<T>) executeAnyQuery(clazz, sqlStatementant, params);
+    }
+
+        /**
+         * Executes any prepared SQL statement with provided parameters
+         * @param clazz identifies the class which will be returned
+         * @param sqlStatementant should be a prepared statement
+         * @param params contains all parameters for the prepared statement, the key represents the index for the statement
+         * @throws SQLException if a database access error occurs
+         * @return List of entites of class <code>clazz</code>
+         */
+    protected ArrayList<?> executeAnyQuery(Class<?> clazz, String sqlStatementant, List params) throws SQLException {
         LOGGER.info("Execute SQL Query, parameters: {query: \"" + sqlStatementant + "\", params: " + params + ", table: " + table + " }");
         PreparedStatement s = dataAccess.getConnection().prepareStatement(sqlStatementant);
         int i = 1;
@@ -177,7 +180,7 @@ public class BaseDao<T extends Entity> {
         }
         ResultSet results = s.executeQuery();
 
-        ArrayList<T> list = new ArrayList<>();
+        ArrayList<Object> list = new ArrayList<>();
 
         List<Field> fields = Arrays.asList(clazz.getDeclaredFields());
         for(Field field: fields) {
@@ -187,7 +190,7 @@ public class BaseDao<T extends Entity> {
         while (results.next()){
 
             try {
-                T dto = clazz.getConstructor().newInstance();
+                Object dto = clazz.getConstructor().newInstance();
 
                 for(Field field: fields) {
                     Col col = field.getAnnotation(Col.class);
