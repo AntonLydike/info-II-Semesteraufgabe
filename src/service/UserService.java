@@ -21,21 +21,17 @@ public class UserService {
     MovieDao movieDao;
     PersonDao personDao;
     WatchListDao watchListDao;
-    LayoutController layout = LayoutController.instance();
 
-    public UserService() {
-        try {
-            userDao = UserDao.instance();
-            movieDao = MovieDao.instance();
-            personDao = PersonDao.instance();
-            watchListDao = WatchListDao.instance();
-        } catch (SQLException e) {
-            layout.error("Could not connect to Database! For more details see the log file or contact the administrator.");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            layout.error("Unexpected error occurred. Please see the log files for more details.");
-        }
+    /**
+     *
+     * @throws SQLException thrown if the connection to the database is not possible
+     * @throws ClassNotFoundException thrown if an unexpected error occurs during initialization
+     */
+    public UserService() throws SQLException, ClassNotFoundException {
+        userDao = UserDao.instance();
+        movieDao = MovieDao.instance();
+        personDao = PersonDao.instance();
+        watchListDao = WatchListDao.instance();
     }
 
     public User login(String name, String password) throws LoginFailedException {
@@ -62,18 +58,12 @@ public class UserService {
      * @param userId identifier of the current user
      * @param movie the movie which is added to the watchlist of the user
      */
-    public void addToWatchList(int userId, Movie movie) {
-        try {
-            PersonDTO director = personDao.upsert(movie.getDirector());
-            MovieDTO movieDTO = movieDao.upsert(movie, director.getId());
-            if (!watchListDao.watchListItemForUserExists(userId, movieDTO.getId()))
-                userDao.addoWatchListItem(userId, movieDTO.getId());
-            else layout.error("The movie is already in your personal watchlist.");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-            layout.error("Could not add movie to your personal watchlist.");
-        }
+    public void addToWatchList(int userId, Movie movie) throws SQLException {
+        PersonDTO director = personDao.upsert(movie.getDirector());
+        MovieDTO movieDTO = movieDao.upsert(movie, director.getId());
+        if (!watchListDao.watchListItemForUserExists(userId, movieDTO.getId()))
+            userDao.addoWatchListItem(userId, movieDTO.getId());
+        else throw new SQLException("The movie is already in your personal watchlist.");
     }
 
     /**
@@ -82,36 +72,18 @@ public class UserService {
      * @param movie the movie which is removed from the watchlist of the user
      * @return
      */
-    public boolean removeFromWatchlist(int userId, Movie movie) {
-        try {
-            MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
-            return userDao.removeWatchListItem(userId, movieDTO.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            layout.error("Could not remove movie from your personal watchlist.");
-        }
-        return false;
+    public boolean removeFromWatchlist(int userId, Movie movie) throws SQLException {
+        MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
+        return userDao.removeWatchListItem(userId, movieDTO.getId());
     }
 
-    public boolean setWatched(int userId, Movie movie) {
-        try {
-            MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
-            return userDao.setWatchListItemWatched(userId, movieDTO.getId());
-        } catch (SQLException e) {
-            e.printStackTrace();
-            layout.error("Could not set movie as watched from your personal watchlist.");
-        }
-        return false;
+    public boolean setWatched(int userId, Movie movie) throws SQLException {
+        MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
+        return userDao.setWatchListItemWatched(userId, movieDTO.getId());
     }
 
-    public boolean setRating(int userId, Movie movie, int rating) {
-        try {
-            MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
-            return userDao.setWatchListItemRating(userId, movieDTO.getId(), rating);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            layout.error("Could not set movie as watched from your personal watchlist.");
-        }
-        return false;
+    public boolean setRating(int userId, Movie movie, int rating) throws SQLException {
+        MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
+        return userDao.setWatchListItemRating(userId, movieDTO.getId(), rating);
     }
 }

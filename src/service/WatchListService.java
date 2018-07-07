@@ -15,27 +15,17 @@ public class WatchListService {
     private WatchListDao watchListDao;
     LayoutController layout = LayoutController.instance();
 
-
-    public WatchListService() {
-        try {
-            watchListDao = WatchListDao.instance();
-        } catch (SQLException e) {
-            layout.error("Could not connect to Database! For more details see the log file or contact the administrator.");
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            layout.error("Unexpected error occured. Please see the logfiles for more details");
-            e.printStackTrace();
-        }
+    /**
+     *
+     * @throws SQLException thrown if the connection to the database is not possible
+     * @throws ClassNotFoundException thrown if an unexpected error occurs during initialization
+     */
+    public WatchListService() throws SQLException, ClassNotFoundException{
+        watchListDao = WatchListDao.instance();
     }
 
-    public List<WatchListItem> getWatchListForUser(int userId) {
-        try {
-            return watchListDao.getWatchListForUser(userId);
-        } catch (LoadWatchlistException e) {
-            e.printStackTrace();
-            layout.error("Could not load the watchlist.");
-        }
-        return new ArrayList<>();
+    public List<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
+        return watchListDao.getWatchListForUser(userId);
     }
 
 }
