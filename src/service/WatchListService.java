@@ -13,7 +13,6 @@ import java.util.function.Consumer;
 public class WatchListService {
 
     private WatchListDao watchListDao;
-    LayoutController layout = LayoutController.instance();
 
     /**
      *
