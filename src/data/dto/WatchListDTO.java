@@ -21,9 +21,6 @@ public class WatchListDTO implements Entity {
     @Col(name="watchlist.personalRating")
     private Integer pesonalRating;
 
-    @Col(name="watchlist.createdAt")
-    private ZonedDateTime createdAt;
-
     @Col(name="watchlist.watched")
     private String watched;
 
@@ -98,14 +95,6 @@ public class WatchListDTO implements Entity {
 
     public void setPesonalRating(Integer pesonalRating) {
         this.pesonalRating = pesonalRating;
-    }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getWatched() {
