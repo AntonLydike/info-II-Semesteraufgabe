@@ -38,7 +38,8 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
                         result.getMovieMcRating().byteValue(), result.getMovieRtRating().byteValue(), result.getMovieRtaRating().byteValue(), result.getMovieYear());
 
                 // watchlistitem
-                WatchListItem item = new WatchListItem(movie, result.getPesonalRating().byteValue(), result.getWatched());
+                WatchListItem item = new WatchListItem(movie, result.getPesonalRating().byteValue(),
+                        (result.getWatched() != 0 || result.getWatched() == null) );
                 watchListItems.add(item);
             }
             return watchListItems;

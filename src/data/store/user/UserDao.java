@@ -61,7 +61,7 @@ public class UserDao extends BaseDao<UserDTO> {
 
 
     public boolean addoWatchListItem(int userId, int movieId) throws SQLException{
-        return executeSQL(UserConstants.ADD_WATCHLIST, Arrays.asList(userId, movieId, 0, null));
+        return executeSQL(UserConstants.ADD_WATCHLIST, Arrays.asList(userId, movieId, 0, 0));
     }
 
     public boolean removeWatchListItem(int userId, int movieId) throws SQLException {
