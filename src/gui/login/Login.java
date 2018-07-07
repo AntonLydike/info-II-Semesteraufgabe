@@ -45,7 +45,6 @@ class LoginController {
 	// since login and register is handled by the same view, keep track what is what
 	private boolean isLoginView = true;
 	
-	Router router = Router.instance();
 	UserService userService = new UserService();
 
 	@FXML
@@ -58,7 +57,7 @@ class LoginController {
 		// TODO error handling?
 		try {
 			userService.login(username.getText(), password.getText());
-			router.render(new MovieCardList(new ArrayList<>()));
+			Router.instance().render(new MovieCardList(new ArrayList<>()));
 		} catch (LoginFailedException e1) {
 			System.out.println("SHOW ERROR");
 /*			error.setText(e1.getMessage());

@@ -23,16 +23,17 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
 ## ToDo:
 
 **Views**
- - Login 
- - Signup
- - Adding new movie
- - Home
- 	- Events verkabeln
- 	- Suche implementieren
- - Movie details view
- - MovieCard
- 	- Click event verkabeln (set checked)
- 	- DoubleClick verkabeln (open Movie detail view)
+ - [x] Login 
+ - [x] Signup
+ - [ ] Adding new movie
+ - [ ] Home
+ 	- [x] Events verkabeln
+ 	- [ ] Suche implementieren
+ - [ ] Movie details view ✓
+ 	- [ ] Implement rating / deleting from watchlist
+ - [x] MovieCard
+ 	- [x] Click event verkabeln (set checked)
+ 	- [x] DoubleClick verkabeln (open Movie detail view)
  
 **Methods in the persistence layer**
  - getWatchlist(user)
