@@ -85,7 +85,7 @@ class MovieCardController {
 		}
 		
 		// do lot's of calculating to compile all the ratings together...
-		byte ratings[] = {m.getImdbRating(), m.getRtaRating(), m.getRtRating(), m.getMcRating()};
+		byte ratings[] = {m.getImdbRating(), m.getRtaRating(), m.getRtRating(), m.getMcRating(), item.getRating()};
 		int total = 0, count = 0;
 		for (byte b: ratings) {
 			if (b != -1) {
@@ -95,6 +95,7 @@ class MovieCardController {
 		}
 		int rating = total / count;
 
+		// image paths
 		String fullStar = "/gui/images/star.png";
 		String halfStar = "/gui/images/star_half.png";
 		String noStar = "/gui/images/star_empty.png";
@@ -134,14 +135,11 @@ class MovieCardController {
 		
 		
 		// load image from url in new thread, otherwise UI hangs *forever*
-		(new Thread() {
-			public void run() {
-				Image im = new Image(m.getPosterURL());
-				cover.setImage(im);
-				// set smoothing to true, some covers are insanely huge...
-				cover.setSmooth(true);
-			}
-		}).start();
+		(new Thread(() -> {
+			Image im = new Image(m.getPosterURL());
+			cover.setImage(im);
+			cover.setSmooth(true);
+		})).start();
 	}
 	
 	@FXML

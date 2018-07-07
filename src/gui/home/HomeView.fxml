@@ -16,7 +16,7 @@
                   <Image url="@../images/add.png" />
                </image>
             </ImageView>
-            <TextField promptText="Search your watchlist" styleClass="large" HBox.hgrow="ALWAYS" />
+            <TextField fx:id="search" promptText="Search your watchlist" styleClass="large" HBox.hgrow="ALWAYS" />
             <ImageView fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" smooth="true" styleClass="pointer">
                <image>
                   <Image url="@../images/search.png" />
@@ -28,4 +28,7 @@
          </padding>
       </HBox>
    </top>
+   <center>
+      <ScrollPane fx:id="scrollContent" fitToWidth="true" hbarPolicy="NEVER" styleClass="background" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

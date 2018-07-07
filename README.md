@@ -25,7 +25,7 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
 **Views**
  - [x] Login 
  - [x] Signup
- - [ ] Adding new movie
+ - [x] Adding new movie
  - [ ] Home
  	- [x] Events verkabeln
  	- [ ] Suche implementieren

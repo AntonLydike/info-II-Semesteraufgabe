@@ -61,6 +61,9 @@ Label.italic {
 Label.link {
 	/*-fx-text-fill: #328cbc;*/
 }
+Label.thin {
+	-fx-font-family: "Open Sans Thin";
+}
 
 #yield {
 	-fx-background-color: #0e1f2b;

@@ -3,7 +3,7 @@ package data;
 public class WatchListItem implements Comparable<WatchListItem> {
 
 	private Movie movie;
-	private byte rating = 0; // rating from 0 to 100
+	private byte rating = -1; // rating from 0 to 100, -1 is "no-value"
 	private boolean watched = false;
 	
 	public WatchListItem(Movie m) {

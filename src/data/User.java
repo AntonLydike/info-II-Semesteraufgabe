@@ -17,22 +17,21 @@ public class User {
 		this.id = id;
 		watchlist = new ArrayList<WatchListItem>();
 	}
+
+	public void unlinkWatchListItem(WatchListItem wli) {
+		watchlist.removeIf((itm) -> itm.equals(wli));
+		// TODO: Connect to service
+	}
 	
 	public void linkMovie(Movie m) {
 		WatchListItem item = new WatchListItem(m);
 		if (!watchlist.contains(item)) {
 			watchlist.add(item);
 		}
+		// TODO: Connect to service
 	}
-
 	public ArrayList<WatchListItem> getWatchlist() {
 		return watchlist;
-	}
-
-	public void addToWatchlist(Movie m) {
-		WatchListItem wli = new WatchListItem(m);
-		watchlist.add(wli);
-		// UserService.addToWatchlist(m);
 	}
 
 	public int getId() {
@@ -41,14 +40,6 @@ public class User {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public void unlinkMovie(Movie m) {
-		watchlist.remove(new WatchListItem(m));
-	}
-	
-	public ArrayList<WatchListItem> getMovieList() {
-		return watchlist;
 	}
 	
 	public String getUsername() {

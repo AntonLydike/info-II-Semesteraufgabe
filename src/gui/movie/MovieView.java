@@ -2,6 +2,7 @@ package gui.movie;
 
 import java.io.IOException;
 import data.Actor;
+import data.Movie;
 import data.WatchListItem;
 import exception.APIRequestException;
 import gui.LayoutController;
@@ -15,6 +16,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
@@ -66,6 +70,8 @@ class MovieViewController {
 	@FXML Label rta;
 	@FXML ImageView checked;
 	@FXML ImageView back;
+	@FXML ImageView delete;
+	@FXML Label year;
 	
 	public MovieViewController(WatchListItem wli) {
 		this.wli = wli;
@@ -111,12 +117,11 @@ class MovieViewController {
 		VBox vb = new VBox();
 		Label role = new Label("as " + a.role);
 		ImageView img = new ImageView(Loader.getImage());
-		(new Thread() {
-			public void run() {
-				Image prelaoded = new Image(a.person.getImageURL());
-				img.setImage(prelaoded);
-			}
-		}).start();
+		
+		(new Thread(() -> {
+			Image prelaoded = new Image(a.person.getImageURL());
+			img.setImage(prelaoded);
+		})).start();
 		
 		img.setFitHeight(50);
 		img.setFitWidth(50);
@@ -143,10 +148,14 @@ class MovieViewController {
 		cover.setImage(new Image(wli.getMovie().getPosterURL()));
 		title.setText(wli.getMovie().getTitle());
 		description.setText(wli.getMovie().getDescription());
-		imdb.setText("" + wli.getMovie().getImdbRating() + "%");
-		rt.setText("" + wli.getMovie().getRtRating() + "%");
-		rta.setText("" + wli.getMovie().getRtaRating() + "%");
-		mc.setText("" + wli.getMovie().getMcRating() + "%");
+
+		imdb.setText(ratingString(wli.getMovie().getImdbRating()));
+		rt.setText(ratingString(wli.getMovie().getRtRating()));
+		rta.setText(ratingString(wli.getMovie().getRtaRating()));
+		mc.setText(ratingString(wli.getMovie().getMcRating()));
+		
+		year.setText("(" + wli.getMovie().getYear() + ")");
+				
 		if (wli.isWatched()) {
 			checked.setImage(new Image("/gui/images/check.png"));
 		}
@@ -159,11 +168,28 @@ class MovieViewController {
 			}
 		});
 		
+		
+		delete.setOnMouseClicked((e) -> {
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Remove " + wli.getMovie().getTitle() + "?", ButtonType.YES, ButtonType.NO);
+			if (alert.showAndWait().orElse(null) == ButtonType.YES) {
+				Router.instance().getCurrentUser().unlinkWatchListItem(wli);
+				Router.instance().render(new HomeView());
+			}
+		});
+		
 		back.setOnMouseClicked((e) -> {
 			Router.instance().render(new HomeView());
 		});
 		
 		loaded = true;
+	}
+	
+	private String ratingString(byte rating) {
+		if (rating == -1) {
+			return "-";
+		} else {
+			return "" + rating + "%";
+		}
 	}
 	
 	// set all actor elements to the same width (the largest one), so that the list doesn't look funny

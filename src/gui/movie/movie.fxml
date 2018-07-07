@@ -25,7 +25,17 @@
                               <Image url="@../images/back.png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="title" styleClass="title" text="Thor: Ragnarok" />
+                        <Label fx:id="title" styleClass="title" />
+                        <Label fx:id="year" text="(2017)">
+                           <styleClass>
+                              <String fx:value="title2" />
+                              <String fx:value="grey" />
+                              <String fx:value="thin" />
+                           </styleClass>
+                           <HBox.margin>
+                              <Insets left="12.0" />
+                           </HBox.margin>
+                        </Label>
                         <Pane HBox.hgrow="ALWAYS" />
                         <ImageView fx:id="checked" fitHeight="48.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true" styleClass="pointer">
                            <image>
@@ -34,6 +44,14 @@
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
+                        </ImageView>
+                        <ImageView fx:id="delete" fitHeight="48.0" fitWidth="48.0" layoutX="625.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" styleClass="pointer">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                           <image>
+                              <Image url="@../images/delete.dark.png" />
+                           </image>
                         </ImageView>
                      </children>
                   </HBox>
@@ -81,7 +99,11 @@
                         </HBox>
                      </children>
                   </HBox>
-                  <Label fx:id="description" text="In Marvel Studios' &quot;Thor: Ragnarok,&quot; Thor is imprisoned on the other side of the universe without his mighty hammer and finds himself in a race against time to get back to Asgard to stop Ragnarok--the destruction of his homeworld and the end of Asgardian civilization--at the hands of an all-powerful new threat, the ruthless Hela. But first he must survive a deadly gladiatorial contest that pits him against his former ally and fellow Avenger--the Incredible Hulk!" wrapText="true" />
+                  <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="128.0" prefViewportWidth="662.0" VBox.vgrow="ALWAYS">
+                     <content>
+                        <Label fx:id="description" text="In Marvel Studios' &quot;Thor: Ragnarok,&quot; Thor is imprisoned on the other side of the universe without his mighty hammer and finds himself in a race against time to get back to Asgard to stop Ragnarok--the destruction of his homeworld and the end of Asgardian civilization--at the hands of an all-powerful new threat, the ruthless Hela. But first he must survive a deadly gladiatorial contest that pits him against his former ally and fellow Avenger--the Incredible Hulk!" wrapText="true" />
+                     </content>
+                  </ScrollPane>
                </children>
             </VBox>
          </children>

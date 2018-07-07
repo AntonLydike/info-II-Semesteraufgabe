@@ -12,10 +12,10 @@ public class Movie implements Comparable<Movie>{
 	private String description;
 	private ArrayList<Actor> actors;
 	private Person director;
-	private byte imdbRating; // IMDB Rating
-	private byte mcRating;	 // metaCritic Rating
-	private byte rtRating;	 // Rotten Tomatoes Rating
-	private byte rtaRating;  // Rotten Tomatoes audience rating
+	private byte imdbRating = -1; // IMDB Rating
+	private byte mcRating = -1;	 // metaCritic Rating
+	private byte rtRating = -1;	 // Rotten Tomatoes Rating
+	private byte rtaRating = -1;  // Rotten Tomatoes audience rating
 	private int year;
 
 	public Movie(String rtPath) {
@@ -80,25 +80,33 @@ public class Movie implements Comparable<Movie>{
 		return imdbRating;
 	}
 	public void setImdbRating(byte imdbRating) {
-		this.imdbRating = imdbRating;
+		if (checkRating(imdbRating)) {
+			this.imdbRating = imdbRating;	
+		}
 	}
 	public byte getMcRating() {
 		return mcRating;
 	}
 	public void setMcRating(byte mcRating) {
-		this.mcRating = mcRating;
+		if (checkRating(mcRating)) {
+			this.mcRating = mcRating;	
+		}
 	}
 	public byte getRtRating() {
 		return rtRating;
 	}
 	public void setRtRating(byte rtRating) {
-		this.rtRating = rtRating;
+		if (checkRating(rtRating)) {
+			this.rtRating = rtRating;	
+		}
 	}
 	public byte getRtaRating() {
 		return rtaRating;
 	}
 	public void setRtaRating(byte rtaRating) {
-		this.rtaRating = rtaRating;
+		if (checkRating(rtaRating)) {
+			this.rtaRating = rtaRating;	
+		}
 	}
 	public void linkActor(Person p, String role) {
 		if (!actors.contains(new Actor(p, ""))) {
@@ -139,6 +147,9 @@ public class Movie implements Comparable<Movie>{
 				+ "\n  rt: " + rtRating
 				+ "\n  rta: " + rtaRating 
 				+ "\n}";
+	}
+	private boolean checkRating(byte rating) {
+		return -1 <= rating && rating <= 100;
 	}
 	
 }

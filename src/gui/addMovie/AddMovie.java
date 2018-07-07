@@ -235,7 +235,7 @@ class AddMovieController {
 				System.out.println(movie.toString());
 				
 				Platform.runLater(() -> {
-					user.addToWatchlist(movie);
+					user.linkMovie(movie);
 					WatchListItem wli = new WatchListItem(movie);
 					// USer.addWatchListItem(wli);
 					Router.instance().render(new MovieView(wli));
