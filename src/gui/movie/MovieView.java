@@ -5,6 +5,7 @@ import data.Actor;
 import data.Movie;
 import data.WatchListItem;
 import exception.APIRequestException;
+import gui.CachedImage;
 import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
@@ -119,7 +120,7 @@ class MovieViewController {
 		ImageView img = new ImageView(Loader.getImage());
 		
 		(new Thread(() -> {
-			Image prelaoded = new Image(a.person.getImageURL());
+			Image prelaoded = CachedImage.get(a.person.getImageURL());
 			img.setImage(prelaoded);
 		})).start();
 		
@@ -162,9 +163,9 @@ class MovieViewController {
 		checked.setOnMouseClicked((e) -> {
 			wli.setWatched(!wli.isWatched());
 			if (wli.isWatched()) {
-				checked.setImage(new Image("/gui/images/check.png"));
+				checked.setImage(CachedImage.get("/gui/images/check.png"));
 			} else {
-				checked.setImage(new Image("/gui/images/check.dark.png"));
+				checked.setImage(CachedImage.get("/gui/images/check.dark.png"));
 			}
 		});
 		

@@ -1,6 +1,8 @@
 package gui.components;
 
 import java.io.IOException;
+
+import gui.CachedImage;
 import gui.Renderable;
 import gui.Router;
 import gui.movie.MovieView;
@@ -136,7 +138,7 @@ class MovieCardController {
 		
 		// load image from url in new thread, otherwise UI hangs *forever*
 		(new Thread(() -> {
-			Image im = new Image(m.getPosterURL());
+			Image im = CachedImage.get(m.getPosterURL());
 			cover.setImage(im);
 			cover.setSmooth(true);
 		})).start();
