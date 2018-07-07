@@ -15,13 +15,11 @@ import javafx.scene.Node;
 public class HomeView implements Renderable {
 
 	private User user;
-	private ArrayList<WatchListItem> list;
 	
 	public HomeView() {
 		// get current user from router
 		this.user = Router.instance().getCurrentUser();
 		// list is now accessed by user.getMovieList()
-		list = user.getWatchlist();
 	}
 
 	@Override
@@ -29,11 +27,9 @@ public class HomeView implements Renderable {
 		FXMLLoader loader = new FXMLLoader();
         try {
         	//loader.setController(new LoginController());
-        	HomeViewController hvc = new HomeViewController(user);
-        	loader.setController(hvc);
+        	loader.setController(new HomeViewController(user));
 			loader.setLocation(getClass().getResource("/gui/home/HomeView.fxml"));
 			Node node = loader.<Node>load();
-			hvc.displayMovieList(list);
 	        return node;
 		} catch (IOException e) {
 			e.printStackTrace();

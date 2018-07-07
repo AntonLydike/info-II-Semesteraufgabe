@@ -5,12 +5,14 @@ package data;
  */
 
 import java.util.ArrayList;
+import service.UserService;
 
 public class User {
 
 	private ArrayList<WatchListItem> watchlist;
 	private int id;
 	private String username;
+	private UserService service = new UserService();
 	
 	public User(int id, String username) {
 		this.username = username;
@@ -20,16 +22,25 @@ public class User {
 
 	public void unlinkWatchListItem(WatchListItem wli) {
 		watchlist.removeIf((itm) -> itm.equals(wli));
-		// TODO: Connect to service
+		service.removeFromWatchlist(id, wli.getMovie());
 	}
 	
 	public void linkMovie(Movie m) {
 		WatchListItem item = new WatchListItem(m);
 		if (!watchlist.contains(item)) {
 			watchlist.add(item);
+			service.addToWatchList(id, m);
 		}
-		// TODO: Connect to service
 	}
+	
+	public boolean setWatchList(ArrayList<WatchListItem> list) {
+		if (watchlist.isEmpty()) {
+			watchlist = list;
+			return true;
+		}
+		return false;
+	}
+	
 	public ArrayList<WatchListItem> getWatchlist() {
 		return watchlist;
 	}

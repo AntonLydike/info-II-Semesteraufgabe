@@ -3,10 +3,13 @@ package gui.login;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import data.User;
 import exception.LoginFailedException;
+import exception.RegisterFailedException;
 import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
+import gui.home.HomeView;
 import gui.movieList.MovieCardList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -50,22 +53,27 @@ class LoginController {
 	@FXML
 	private void btnClick(ActionEvent e) {
 		error.setText("");
-		System.out.println("Logging in...");
-		System.out.println("username: " + username.getText());
-		System.out.println("password: " + password.getText());
-		// TODO check if login is valid
-		// TODO error handling?
+		// register first (if necessary)
+		if (!isLoginView) {
+			try {
+				if (!userService.register(username.getText().trim(), password.getText())) {
+					LayoutController.error("Couldn't register!");
+					return;
+				}
+			} catch (RegisterFailedException e1) {
+				LayoutController.error(e1.getMessage());
+				return;
+			}
+		}
+		
+		// then login
 		try {
-			userService.login(username.getText(), password.getText());
-			Router.instance().render(new MovieCardList(new ArrayList<>()));
+			User user = userService.login(username.getText().trim(), password.getText());
+			Router.instance().setCurrentUser(user);
+			Router.instance().render(new HomeView());
 		} catch (LoginFailedException e1) {
-			System.out.println("SHOW ERROR");
-/*			error.setText(e1.getMessage());
-			error.setTextFill(Paint.valueOf("RED"));*/
 			LayoutController.error(e1.getMessage());
 		}
-
-		// for testing
 	}
 	
 	@FXML

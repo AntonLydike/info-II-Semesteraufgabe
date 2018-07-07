@@ -19,12 +19,15 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
+import service.UserService;
+import service.WatchListService;
 
 public class HomeViewController {
 
 	private User user;
 	private ArrayList<WatchListItem> list;
 	private boolean searchDisplayed = false;
+	private boolean rendered = false;
 	private Node fullList = null;
 	
 	@FXML BorderPane main;
@@ -35,6 +38,11 @@ public class HomeViewController {
 	
 	public HomeViewController(User user) {
 		this.user = user;
+		
+		if (user.getWatchlist().isEmpty()) {
+			WatchListService usv = new WatchListService();
+			user.setWatchList(usv.getWatchListForUser(user.getId()));	
+		}
 	}
 	
 	public void displayMovieList(ArrayList<WatchListItem> list) {
@@ -73,6 +81,8 @@ public class HomeViewController {
 			
 			displayNode(new MovieCardList(filtered));
 		});
+		
+		rendered = true;
 	}
 	
 	@FXML void goToAddView(MouseEvent e) {
