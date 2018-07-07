@@ -24,8 +24,8 @@ public class WatchListDTO implements Entity {
     @Col(name="watchlist.createdAt")
     private ZonedDateTime createdAt;
 
-    @Col(name="watchlist.lastWatched")
-    private ZonedDateTime lastWatched;
+    @Col(name="watchlist.watched")
+    private Boolean watched;
 
     @Col(name="movies.title")
     private String movieTitle;
@@ -108,12 +108,12 @@ public class WatchListDTO implements Entity {
         this.createdAt = createdAt;
     }
 
-    public ZonedDateTime getLastWatched() {
-        return lastWatched;
+    public Boolean getWatched() {
+        return watched;
     }
 
-    public void setLastWatched(ZonedDateTime lastWatched) {
-        this.lastWatched = lastWatched;
+    public void setWatched(Boolean watched) {
+        this.watched = watched;
     }
 
     public String getMovieTitle() {
