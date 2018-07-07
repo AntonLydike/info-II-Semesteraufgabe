@@ -22,7 +22,7 @@ public class WatchListDTO implements Entity {
     private Integer pesonalRating;
 
     @Col(name="watchlist.watched")
-    private String watched;
+    private Boolean watched;
 
     @Col(name="movies.title")
     private String movieTitle;
@@ -97,11 +97,11 @@ public class WatchListDTO implements Entity {
         this.pesonalRating = pesonalRating;
     }
 
-    public String getWatched() {
+    public boolean getWatched() {
         return watched;
     }
 
-    public void setWatched(String watched) {
+    public void setWatched(boolean watched) {
         this.watched = watched;
     }
 
