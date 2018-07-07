@@ -26,8 +26,8 @@ public class WatchListDao extends BaseDao<WatchListDTO> {
         return unique;
     }
 
-    public List<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
-        List<WatchListItem> watchListItems = new ArrayList<>();
+    public ArrayList<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
+        ArrayList<WatchListItem> watchListItems = new ArrayList<>();
         try {
             ArrayList<WatchListDTO> results =  executeQuery(WatchListDTO.class, WatchListConstants.SELECT_WATCHLIST_FOR_USERID, Arrays.asList(userId));
             for(WatchListDTO result : results) {
