@@ -23,6 +23,12 @@ public class WatchListItem implements Comparable<WatchListItem> {
 	}
 	
 	public WatchListItem(Movie movie, byte rating, boolean watched) {
+		try {
+			service = new UserService();
+		} catch (SQLException | ClassNotFoundException e) {
+			System.err.println("Couldn't load service! Errors ahead!");
+			e.printStackTrace();
+		}
 		this.movie = movie;
 		this.rating = rating;
 		this.watched = watched;
