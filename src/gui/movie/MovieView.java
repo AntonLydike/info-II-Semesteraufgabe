@@ -1,8 +1,8 @@
 package gui.movie;
 
 import java.io.IOException;
+import java.util.Optional;
 import data.Actor;
-import data.Movie;
 import data.WatchListItem;
 import exception.APIRequestException;
 import gui.CachedImage;
@@ -17,8 +17,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -73,6 +75,7 @@ class MovieViewController {
 	@FXML ImageView back;
 	@FXML ImageView delete;
 	@FXML Label year;
+	@FXML Button rateButton;
 	
 	public MovieViewController(WatchListItem wli) {
 		this.wli = wli;
@@ -182,12 +185,30 @@ class MovieViewController {
 			Router.instance().render(new HomeView());
 		});
 		
+		rateButton.setText("RATE (" + ratingString(wli.getRating()) + ")");
+		
+		rateButton.setOnAction((e) -> {
+			TextInputDialog tid = new TextInputDialog("" + wli.getRating());
+			tid.setContentText("Your rating for " + wli.getMovie().getTitle() + ":");
+			Optional<String> in = tid.showAndWait();
+			try {
+				byte rating = (byte) Integer.parseInt(in.orElse("-1"));
+				if (!wli.setRating(rating)) {
+					LayoutController.error("Rating must be between -1 (not set) and 100!");
+				}
+				rateButton.setText("RATE (" + ratingString(wli.getRating()) + ")");
+			} catch (NumberFormatException err) {
+				LayoutController.error("This isn't a number!");
+			}
+			
+		});
+		
 		loaded = true;
 	}
 	
 	private String ratingString(byte rating) {
 		if (rating == -1) {
-			return "-";
+			return "??";
 		} else {
 			return "" + rating + "%";
 		}

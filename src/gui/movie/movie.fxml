@@ -55,7 +55,7 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox maxWidth="450.0">
+                  <HBox maxWidth="550.0">
                      <children>
                         <HBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                            <children>
@@ -97,6 +97,7 @@
                               </ImageView>
                            </children>
                         </HBox>
+                        <Button fx:id="rateButton" mnemonicParsing="false" text="BEWERTEN" />
                      </children>
                   </HBox>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="128.0" prefViewportWidth="662.0" VBox.vgrow="ALWAYS">

@@ -3,9 +3,7 @@ package gui.home;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-import data.Movie;
 import data.User;
 import data.WatchListItem;
 import exception.LoadWatchlistException;
@@ -20,8 +18,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
-import service.UserService;
 import service.WatchListService;
 
 public class HomeViewController {

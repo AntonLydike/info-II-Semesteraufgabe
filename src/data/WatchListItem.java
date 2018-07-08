@@ -43,6 +43,7 @@ public class WatchListItem implements Comparable<WatchListItem> {
 	}
 
 	public boolean setRating(byte rating) {
+		if (!checkRating(rating)) return false;
 		this.rating = rating;
 		try {
 			service.setRating(Router.instance().getCurrentUser().getId(), movie, rating);	
@@ -75,6 +76,9 @@ public class WatchListItem implements Comparable<WatchListItem> {
 	
 	public boolean equals(WatchListItem a) {
 		return a.compareTo(this) == 0;
+	}
+	private boolean checkRating(byte rating) {
+		return -1 <= rating && rating <= 100;
 	}
 	
 }
