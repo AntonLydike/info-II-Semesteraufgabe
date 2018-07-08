@@ -34,6 +34,13 @@ public class UserService {
         watchListDao = WatchListDao.instance();
     }
 
+    /**
+     * login with the provided credentials
+     * @param name username of the user
+     * @param password password of the user
+     * @return a User object with the internal ID and username
+     * @throws LoginFailedException thrown if credentials are invalid
+     */
     public User login(String name, String password) throws LoginFailedException {
         UserDTO dto = userDao.loginUser(name, password);
         return new User(dto.getId(), dto.getUsername());
@@ -71,17 +78,34 @@ public class UserService {
      * @param userId identifier for the current user
      * @param movie the movie which is removed from the watchlist of the user
      * @return
+     * @throws SQLException thrown if the movie could not be removed from the watchlist, or the movie does not exist
      */
     public boolean removeFromWatchlist(int userId, Movie movie) throws SQLException {
         MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
         return userDao.removeWatchListItem(userId, movieDTO.getId());
     }
 
+    /**
+     * mark a movie in the personal watchlist as watched (or not watched)
+     * @param userId identifier for the current user
+     * @param movie the movie which is selected
+     * @param watched boolean value if the movie is watched or not
+     * @return
+     * @throws SQLException thrown if the value could not be set, or the movie does not exist
+     */
     public boolean setWatched(int userId, Movie movie, boolean watched) throws SQLException {
         MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
         return userDao.setWatchListItemWatched(userId, movieDTO.getId(), watched);
     }
 
+    /**
+     * set the personal rating of a movie in the personal watchlist
+     * @param userId identifier for the current user
+     * @param movie the movie which is selected
+     * @param rating rating (between 0 - 100)
+     * @return
+     * @throws SQLException thrown if the value could not be set, or the movie does not exist
+     */
     public boolean setRating(int userId, Movie movie, int rating) throws SQLException {
         MovieDTO movieDTO = movieDao.searchByRtPath(movie.getRtPath());
         return userDao.setWatchListItemRating(userId, movieDTO.getId(), rating);

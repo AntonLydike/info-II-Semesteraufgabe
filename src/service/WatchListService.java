@@ -23,6 +23,12 @@ public class WatchListService {
         watchListDao = WatchListDao.instance();
     }
 
+    /**
+     * get the personal watchlist of the current user
+     * @param userId identifier of the current user
+     * @return List of WatchListItems of the current user
+     * @throws LoadWatchlistException
+     */
     public ArrayList<WatchListItem> getWatchListForUser(int userId) throws LoadWatchlistException{
         return watchListDao.getWatchListForUser(userId);
     }
