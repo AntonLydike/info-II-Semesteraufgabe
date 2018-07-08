@@ -27,7 +27,7 @@ public class WatchListDTO implements Entity {
     @Col(name="movies.title")
     private String movieTitle;
 
-    @Col(name="movies.title")
+    @Col(name="movies.description")
     private String movieDescription;
 
     @Col(name="movies.year")
