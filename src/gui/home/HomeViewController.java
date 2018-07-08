@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
 import data.Movie;
 import data.User;
 import data.WatchListItem;
@@ -30,7 +29,6 @@ public class HomeViewController {
 	private User user;
 	private ArrayList<WatchListItem> list;
 	private boolean searchDisplayed = false;
-	private boolean rendered = false;
 	private Node fullList = null;
 	
 	@FXML BorderPane main;
@@ -43,9 +41,11 @@ public class HomeViewController {
 		this.user = user;
 		
 		if (user.getWatchlist().isEmpty()) {
+			System.out.println("Getting watchlist");
 			try {
 				WatchListService usv = new WatchListService();
 				user.setWatchList(usv.getWatchListForUser(user.getId()));
+				System.out.println("Watchlist len:" + user.getWatchlist().size());
 			} catch (LoadWatchlistException | ClassNotFoundException | SQLException e) {
 				System.err.println("Could't get watchlist!");
 				e.printStackTrace();
@@ -91,7 +91,7 @@ public class HomeViewController {
 			displayNode(new MovieCardList(filtered));
 		});
 		
-		rendered = true;
+		displayMovieList(user.getWatchlist());
 	}
 	
 	@FXML void goToAddView(MouseEvent e) {
