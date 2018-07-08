@@ -4,6 +4,11 @@ import gui.Renderable;
 import javafx.scene.Node;
 import javafx.scene.image.*;
 
+/**
+ * A quick way to get a loader anywhere
+ * @author anton
+ *
+ */
 public class Loader implements Renderable {
 	@Override
 	public Node getView() {
@@ -11,6 +16,10 @@ public class Loader implements Renderable {
 		return im;
 	}
 	
+	/**
+	 * Returns an Image with the dark loading icon
+	 * @return
+	 */
 	public static Image getImage() {
 		return new Image("/gui/images/loader.dark.gif");
 	}

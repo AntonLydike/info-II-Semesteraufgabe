@@ -1,10 +1,14 @@
 package data;
 
 import java.sql.SQLException;
-
 import gui.Router;
 import service.UserService;
 
+/**
+ * Hold the items in the users WatchList. A Movie, A rating and if the user has already watched it. Handles connection to persistence
+ * @author anton
+ *
+ */
 public class WatchListItem implements Comparable<WatchListItem> {
 
 	private Movie movie;
@@ -42,6 +46,11 @@ public class WatchListItem implements Comparable<WatchListItem> {
 		return rating;
 	}
 
+	/**
+	 * Sets the rating for the Movie
+	 * @param rating Must be in range [-1,100], -1 meaning no rating 
+	 * @return If the new rating was valid and could be set
+	 */
 	public boolean setRating(byte rating) {
 		if (!checkRating(rating)) return false;
 		this.rating = rating;
@@ -58,6 +67,11 @@ public class WatchListItem implements Comparable<WatchListItem> {
 		return watched;
 	}
 
+	/**
+	 * Sets the Watched flag in persistence
+	 * @param watched
+	 * @return If the item could be updated in persistence
+	 */
 	public boolean setWatched(boolean watched) {
 		this.watched = watched;
 		try {

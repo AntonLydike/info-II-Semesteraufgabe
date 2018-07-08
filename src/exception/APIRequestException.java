@@ -1,5 +1,10 @@
 package exception;
 
+/**
+ * Throws when an API Request doesn't work out
+ * @author anton
+ *
+ */
 public class APIRequestException extends Exception {
 	private static final long serialVersionUID = 1L;
 	

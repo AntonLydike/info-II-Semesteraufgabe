@@ -119,11 +119,11 @@ class MovieViewController {
 	private static HBox createActorNode(Actor a) {
 		HBox root = new HBox();
 		VBox vb = new VBox();
-		Label role = new Label("as " + a.role);
+		Label role = new Label("as " + a.getRole());
 		ImageView img = new ImageView(Loader.getImage());
 		
 		(new Thread(() -> {
-			Image prelaoded = CachedImage.get(a.person.getImageURL());
+			Image prelaoded = CachedImage.get(a.getPerson().getImageURL());
 			img.setImage(prelaoded);
 		})).start();
 		
@@ -132,7 +132,7 @@ class MovieViewController {
 		
 		vb.setAlignment(Pos.CENTER_LEFT);
 		vb.setSpacing(0);
-		vb.getChildren().add(new Label(a.person.getName()));
+		vb.getChildren().add(new Label(a.getPerson().getName()));
 		vb.getChildren().add(role);
 		
 		role.getStyleClass().add("grey");
@@ -206,6 +206,11 @@ class MovieViewController {
 		loaded = true;
 	}
 	
+	/**
+	 * Converts byte rating to a string representation
+	 * @param rating must be in [-1,100]
+	 * @return "num%" if in [0,100] otherwise "??"
+	 */
 	private String ratingString(byte rating) {
 		if (rating == -1) {
 			return "??";

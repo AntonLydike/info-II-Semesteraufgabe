@@ -1,11 +1,14 @@
 package data;
 
-// this is not a real class, just for items of movie actor lists
-//an actor is just a person with a role
-//no inheriting, since a person can be an actor and a director, no duplicate data here pls
+/**
+ * Actors are Persons that have a certain role in a movie
+ * @author anton
+ *
+ */
 public class Actor implements Comparable<Actor>{
-	public Person person;
-	public String role;
+	private Person person;
+	private String role;
+	
 	public Actor(Person p, String r) {
 		person = p;
 		role = r;
@@ -20,4 +23,14 @@ public class Actor implements Comparable<Actor>{
 	public boolean equals(Actor a) {
 		return a.compareTo(this) == 0;
 	}
+
+	public Person getPerson() {
+		return person;
+	}
+
+	public String getRole() {
+		return role;
+	}
+	
+	
 }

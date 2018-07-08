@@ -7,8 +7,17 @@ import java.sql.SQLException;
  */
 
 import java.util.ArrayList;
-import service.UserService;
 
+import exception.LoadWatchlistException;
+import gui.LayoutController;
+import service.UserService;
+import service.WatchListService;
+
+/**
+ * The User object represents a login session. It holds the watchlist, holds connection to persistence, etc...
+ * @author anton
+ *
+ */
 public class User {
 
 	private ArrayList<WatchListItem> watchlist;
@@ -19,15 +28,31 @@ public class User {
 	public User(int id, String username) {
 		this.username = username;
 		this.id = id;
-		watchlist = new ArrayList<WatchListItem>();
+		// create user service
 		try {
 			service = new UserService();
 		} catch (SQLException | ClassNotFoundException e) {
 			System.err.println("Couldn't load service! Errors ahead!");
 			e.printStackTrace();
 		}
+		// get watchlist from the server
+		try {
+			WatchListService usv = new WatchListService();
+			watchlist = usv.getWatchListForUser(getId());
+			System.out.println("Watchlist len:" + getWatchlist().size());
+		} catch (LoadWatchlistException | ClassNotFoundException | SQLException e) {
+			System.err.println("Could't get watchlist!");
+			e.printStackTrace();
+			LayoutController.error("Couldn't fetch your watchlist: " + e.getMessage());
+			watchlist = new ArrayList<WatchListItem>();
+		}	
 	}
 
+	/**
+	 * Removes Movie from the watchlist and updates persistence
+	 * @param wli The watchListItem to remove
+	 * @return if the movie could be removed
+	 */
 	public boolean unlinkWatchListItem(WatchListItem wli) {
 		watchlist.removeIf((itm) -> itm.equals(wli));
 		try {
@@ -38,6 +63,11 @@ public class User {
 		return true;
 	}
 	
+	/**
+	 * Removes Movie from the watchlist and updates persistence
+	 * @param m The movie to be deleted
+	 * @return if the movie could be removed
+	 */
 	public boolean linkMovie(Movie m) {
 		WatchListItem item = new WatchListItem(m);
 		if (!watchlist.contains(item)) {
@@ -50,14 +80,6 @@ public class User {
 			}
 		}
 		return true;
-	}
-	
-	public boolean setWatchList(ArrayList<WatchListItem> list) {
-		if (watchlist.isEmpty()) {
-			watchlist = list;
-			return true;
-		}
-		return false;
 	}
 	
 	public ArrayList<WatchListItem> getWatchlist() {

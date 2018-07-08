@@ -4,6 +4,11 @@ import data.User;
 import javafx.scene.Node;
 import javafx.stage.Stage;
 
+/**
+ * Handles which view will be displayed at any given time. Singleton.
+ * @author anton
+ *
+ */
 public class Router {
 	private static Router instance;
 
@@ -15,6 +20,11 @@ public class Router {
 		this.stage = s;
 	}
 	
+	/**
+	 * Initializes the Router with the stage, can only be called once
+	 * @param s The Apps Stage
+	 * @return Returns a reference to the router
+	 */
 	public static Router init(Stage s) {
 		if (instance == null) {
 			instance = new Router(s);
@@ -25,6 +35,10 @@ public class Router {
 		return instance;
 	}
 	
+	/**
+	 * gets the current router instance, must be initialized first
+	 * @return
+	 */
 	public static Router instance() {
 		if (instance == null) {
 			System.out.println("[Router] instance is null!");
@@ -41,6 +55,10 @@ public class Router {
 		return currentUser;
 	}
 	
+	/**
+	 * Render a Renderable inside the layout
+	 * @param r The View to display
+	 */
 	public void render(Renderable r) {
 		Node next = r.getView();
 		if (next == null) {

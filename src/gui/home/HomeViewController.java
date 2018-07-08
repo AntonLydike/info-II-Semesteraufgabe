@@ -1,13 +1,10 @@
 package gui.home;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import data.User;
 import data.WatchListItem;
-import exception.LoadWatchlistException;
-import gui.LayoutController;
 import gui.Renderable;
 import gui.Router;
 import gui.addMovie.AddMovie;
@@ -18,8 +15,12 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
-import service.WatchListService;
 
+/**
+ * Controller for HomeView, implements a simple search function for the watchlist, all exposed methods are only meant for FXML
+ * @author anton
+ *
+ */
 public class HomeViewController {
 
 	private User user;
@@ -35,22 +36,10 @@ public class HomeViewController {
 	
 	public HomeViewController(User user) {
 		this.user = user;
-		
-		if (user.getWatchlist().isEmpty()) {
-			System.out.println("Getting watchlist");
-			try {
-				WatchListService usv = new WatchListService();
-				user.setWatchList(usv.getWatchListForUser(user.getId()));
-				System.out.println("Watchlist len:" + user.getWatchlist().size());
-			} catch (LoadWatchlistException | ClassNotFoundException | SQLException e) {
-				System.err.println("Could't get watchlist!");
-				e.printStackTrace();
-				LayoutController.error("Couldn't fetch your watchlist: " + e.getMessage());
-			}	
-		}
+		list = user.getWatchlist();
 	}
 	
-	public void displayMovieList(ArrayList<WatchListItem> list) {
+	private void displayMovieList(ArrayList<WatchListItem> list) {
 		this.list = list;
 		fullList = (new MovieCardList(list)).getView();
 		displayNode(fullList);
@@ -64,8 +53,7 @@ public class HomeViewController {
 		displayNode(n.getView());
 	}
 
-	@FXML
-	public void initialize() {
+	@FXML void initialize() {
 		search.setOnKeyPressed((e) -> {
 			String query = search.getText().trim().toLowerCase();
 			if (query.length() < 3) {

@@ -1,17 +1,17 @@
 package gui.home;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
-import data.Movie;
-import data.Person;
 import data.User;
-import data.WatchListItem;
 import gui.Renderable;
 import gui.Router;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
+/**
+ * Home View displaying the users watchlist
+ * @author anton
+ *
+ */
 public class HomeView implements Renderable {
 
 	private User user;

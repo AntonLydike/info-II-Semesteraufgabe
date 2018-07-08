@@ -2,8 +2,9 @@ package data;
 
 import java.util.ArrayList;
 
-/*
+/**
  * A Movie objects hold all the interesting information about that movie, various ratings, etc
+ * @author anton
  */
 public class Movie implements Comparable<Movie>{
 	private String rtPath; // Path on rotten tomatoes, unique ID
@@ -122,10 +123,13 @@ public class Movie implements Comparable<Movie>{
 		this.actors.remove(new Actor(p, ""));
 	}
 	public void unlinkActor(Actor a) {
-		unlinkActor(a.person);
+		unlinkActor(a.getPerson());
 	}
 
 	@Override
+	/**
+	 * Two Movies are equal, if both have the same path on rotten tomatoes
+	 */
 	public int compareTo(Movie o) {
 		return o.getRtPath().compareTo(rtPath);
 	}

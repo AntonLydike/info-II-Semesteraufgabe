@@ -1,8 +1,6 @@
 package gui.movieList;
 
 import java.util.ArrayList;
-
-import data.Movie;
 import data.WatchListItem;
 import gui.Renderable;
 import gui.components.MovieCard;
@@ -10,6 +8,11 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.FlowPane;
 
+/**
+ * A list of MovieCards for a watchlist
+ * @author anton
+ *
+ */
 public class MovieCardList implements Renderable {
 
 	private ArrayList<WatchListItem> list;
@@ -21,6 +24,9 @@ public class MovieCardList implements Renderable {
 	}
 
 	@Override
+	/**
+	 * Returns a FlowPane containing a MovieCards for each movie in the watchlist 
+	 */
 	public Node getView() {
 		FlowPane fp = new FlowPane();
 		fp.setVgap(16);

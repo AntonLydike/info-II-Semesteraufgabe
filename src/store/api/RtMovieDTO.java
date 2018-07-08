@@ -1,12 +1,8 @@
 package store.api;
 
 import java.util.ArrayList;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
 import data.Actor;
-import data.Movie;
 import data.Person;
 import exception.APIRequestException;
 
@@ -24,7 +20,13 @@ public class RtMovieDTO {
 	private String description;
 	private ArrayList<Actor> actors = new ArrayList<Actor>();
 	private String path;
-	
+
+	/**
+	 * Converts a JSON response to a DTO
+	 * @param obj The response from the server
+	 * @param path The movie path on rotten tomatoes (not included in the JSON response)
+	 * @throws APIRequestException If any errors were encountered while reading the response
+	 */
 	public RtMovieDTO(JSONObject obj, String path) throws APIRequestException {
 		try {
 			this.path = path;

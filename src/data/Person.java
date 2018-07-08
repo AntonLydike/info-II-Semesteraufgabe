@@ -1,8 +1,8 @@
 package data;
 
-/*
+/**
  * A Person is someone who is in movies or directs them, voices them, what ever...
- * 
+ * @author anton
  */
 public class Person implements Comparable<Person>{
 

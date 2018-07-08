@@ -97,7 +97,7 @@
                               </ImageView>
                            </children>
                         </HBox>
-                        <Button fx:id="rateButton" mnemonicParsing="false" text="BEWERTEN" />
+                        <Button fx:id="rateButton" mnemonicParsing="false" text="RATE" />
                      </children>
                   </HBox>
                   <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefViewportHeight="128.0" prefViewportWidth="662.0" VBox.vgrow="ALWAYS">

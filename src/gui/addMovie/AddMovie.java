@@ -29,6 +29,11 @@ import store.api.RtMovieDTO;
 import store.api.RtQueryDTO;
 import store.api.RtQueryMovieItem;
 
+/**
+ * Creates the AddMovie Scene. It will ask for the movie Title and crawl IMDB and rotten tomatoes for information about it. 
+ * @author anton
+ *
+ */
 public class AddMovie implements Renderable {
 
 	private User user;
@@ -116,6 +121,10 @@ class AddMovieController {
 		}).start();
 	}
 	
+	/**
+	 * Display the search results in the searchResults VBox
+	 * @param results
+	 */
 	private void displaySearchResults(RtQueryDTO results) {
 		loader(false);
 		
@@ -170,6 +179,10 @@ class AddMovieController {
 		}
 	}
 	
+	/**
+	 * Gathers movie Information about a given RtQueryMovieItem, when done it will load a MovieView for that Movie and add it to the users watchlist
+	 * @param dto The Movie in question
+	 */
 	private void gatherMovieInformation(RtQueryMovieItem dto) {
 		Movie movie = new Movie(dto.getUrl());
 		movie.setDescription("");

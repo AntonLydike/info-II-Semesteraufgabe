@@ -1,11 +1,15 @@
 package store.api;
 
+/**
+ * DTO for movies found inside a RTQueryDTO
+ * @author anton
+ *
+ */
 public class RtQueryMovieItem {
 	private String name;
 	private int year;
 	private String url;
 	private String image;
-	
 	private String[] actors;
 	
 	public RtQueryMovieItem(String name, int year, String url, String image, String actors[]) {

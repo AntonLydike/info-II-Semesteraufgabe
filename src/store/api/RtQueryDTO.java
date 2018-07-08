@@ -6,10 +6,20 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import exception.APIRequestException;
 
+/**
+ * A DataTransferObject to transfer API Data from a RottenTomatoes search
+ * @author anton
+ *
+ */
 public class RtQueryDTO {
 	private ArrayList<RtQueryMovieItem> movies;
 	private ArrayList<RtQuerySeriesItem> series;
 	
+	/**
+	 * Converts a JSON response to a DTO
+	 * @param obj The response from the server
+	 * @throws APIRequestException If any errors were encountered while reading the response
+	 */
 	public RtQueryDTO (JSONObject obj) throws APIRequestException {
 		movies = new ArrayList<RtQueryMovieItem>();
 		series = new ArrayList<RtQuerySeriesItem>();

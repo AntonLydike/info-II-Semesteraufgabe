@@ -1,0 +1,1 @@
+typeSearchIndex = [{"p":"store.api","l":"MovieInfoApi"}]

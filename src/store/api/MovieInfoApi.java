@@ -89,7 +89,7 @@ public class MovieInfoApi {
 	 * Uses RottenTomatoes Search api to look for a certain query
 	 * @param query: The string to look for on rotten tomatoes
 	 * @return a RtQueryDTO containing movies and series found for that query
-	 * @throws APIRequestException
+	 * @throws APIRequestException When the API Request couldn't be fullfilled
 	 */
 	public RtQueryDTO rtQuery(String query) throws APIRequestException {
 		return new RtQueryDTO(getJsonAt(buildQueryString("rt", "find", "q=" + encodeURIcomponent(query)), "[rt/find?q=" + query + "]"));
@@ -99,7 +99,7 @@ public class MovieInfoApi {
 	 * Scrapes RT at path and returns info about that movie
 	 * @param rtPath: The path on rotten tomatoes to scrape
 	 * @return a RtMovieDTO object containing that movies data
-	 * @throws APIRequestException
+	 * @throws APIRequestException When the API Request couldn't be fullfilled
 	 */
 	public RtMovieDTO rtInfo(String rtPath) throws APIRequestException {
 		return new RtMovieDTO(getJsonAt(buildQueryString("rt", "info", "url=" + encodeURIcomponent(rtPath)),  "[rt/info?url=" + rtPath + "]"), rtPath);
@@ -109,7 +109,7 @@ public class MovieInfoApi {
 	 * Scrapes RT at path and returns info about that person
 	 * @param rtPath: The path on rotten tomatoes to scrape
 	 * @return a JSONObject containing that persons data
-	 * @throws APIRequestException
+	 * @throws APIRequestException When the API Request couldn't be fullfilled
 	 */
 	public JSONObject rtPerson(String rtPath) throws APIRequestException {
 		return getJsonAt(buildQueryString("rt", "person", "url=" + encodeURIcomponent(rtPath)),  "[rt/person?url=" + rtPath + "]");
@@ -119,7 +119,7 @@ public class MovieInfoApi {
 	 * Scrapes IMDB and looks for the movie with that name
 	 * @param name The name of the movie
 	 * @return Return a JSONObject containing information about that Movie
-	 * @throws APIRequestException
+	 * @throws APIRequestException When the API Request couldn't be fullfilled
 	 */
 	public ImdbMovieDTO imdbInfo(String name) throws APIRequestException {
 		return new ImdbMovieDTO(getJsonAt(buildQueryString("imdb", "info", "q=" + encodeURIcomponent(name)), "[imdb/info?q=" + name + "]"));

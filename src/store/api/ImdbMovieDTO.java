@@ -4,6 +4,11 @@ import org.json.JSONObject;
 
 import exception.APIRequestException;
 
+/**
+ * A DataTransferObject to transfer movie information from IMDB
+ * @author anton
+ *
+ */
 public class ImdbMovieDTO {
 	private String imdbId;
 	private String title;
@@ -13,6 +18,11 @@ public class ImdbMovieDTO {
 	private String description;
 	private String storyline;
 	
+	/**
+	 * Converts a JSON response to a DTO
+	 * @param obj The response from the server
+	 * @throws APIRequestException If any errors were encountered while reading the response
+	 */
 	public ImdbMovieDTO(JSONObject obj) throws APIRequestException {
 		try {
 			imdbId = getString(obj, "id");

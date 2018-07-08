@@ -19,6 +19,11 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import service.UserService;
 
+/**
+ * Creates a Login View, with functionality to login a user
+ * @author anton
+ *
+ */
 public class Login implements Renderable {
 	@Override
 	public Node getView() {
@@ -82,6 +87,7 @@ class LoginController {
 		}
 	}
 	
+	// switches the view from a login view to a register view
 	@FXML
 	private void registerSwitch(ActionEvent e) {
 		if (isLoginView) {
