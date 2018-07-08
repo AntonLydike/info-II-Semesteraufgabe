@@ -28,7 +28,11 @@ public class RtMovieDTO {
 	public RtMovieDTO(JSONObject obj, String path) throws APIRequestException {
 		try {
 			this.path = path;
-			director = new Person(obj.getJSONObject("director").getString("name"), "", obj.getJSONObject("director").getString("url"));
+			if (obj.has("director")) {
+				director = new Person(obj.getJSONObject("director").getString("name"), "", obj.getJSONObject("director").getString("url"));
+			} else {
+				director = new Person("??", "https://staticv2-4.rottentomatoes.com/static/images/redesign/actor.default.tmb.gif","/nobody");
+			}
 			title = getString(obj, "title");
 			description = getString(obj, "description");
 			imageURL = getString(obj, "image");

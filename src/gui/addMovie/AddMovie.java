@@ -80,6 +80,8 @@ class AddMovieController {
 		searchbtn.setOnMouseClicked((e) -> {
 			search(null);
 		});
+		
+		searchBar.requestFocus();
 	}
 	
 	private void loader(boolean display) {
@@ -215,7 +217,7 @@ class AddMovieController {
 							}
 						} catch (APIRequestException e) {
 							Platform.runLater(() -> {
-								LayoutController.error(e.getMessage());
+								LayoutController.error("Couldn't find information about this video on IMDB!");
 								e.printStackTrace();
 							});
 						}
