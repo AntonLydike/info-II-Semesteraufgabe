@@ -31,7 +31,8 @@ public class DataAccess {
 
     /**
      * Create connection to Database
-     *
+     * @throws ClassNotFoundException thrown if DataAccess could not be initialized
+     * @throws SQLException thrown if connection to database is not possible
      */
     private DataAccess() throws ClassNotFoundException, SQLException {
         LOGGER.info("Open connection to database");
@@ -42,6 +43,7 @@ public class DataAccess {
     /**
      * Access to singelton instance
      * @return dataAccess object for connecting to DB
+     * @throws ClassNotFoundException thrown if DataAccess could not be initialized
      */
     public static DataAccess instance() throws ClassNotFoundException,
             SQLException {

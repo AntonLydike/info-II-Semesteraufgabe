@@ -50,7 +50,9 @@ public class UserService {
      * Register a new User
      * @param name the username for the new user
      * @param password the password for the new user
-     * @return
+     * @return <code>true</code> if the first result is a <code>ResultSet</code>
+     *         object; <code>false</code> if the first result is an update
+     *         count or there is no result
      * @throws RegisterFailedException thrown, if the username is already taken, name or password too long
      */
     public boolean register(String name, String password) throws RegisterFailedException {
@@ -64,6 +66,7 @@ public class UserService {
      * If the director (person) does not already exists in the database, it will be added.
      * @param userId identifier of the current user
      * @param movie the movie which is added to the watchlist of the user
+     * @throws SQLException thrown if the movie could not be added to the watchlist
      */
     public void addToWatchList(int userId, Movie movie) throws SQLException {
         PersonDTO director = personDao.upsert(movie.getDirector());
@@ -77,7 +80,9 @@ public class UserService {
      * removes a movie from the personal watchlist of the user
      * @param userId identifier for the current user
      * @param movie the movie which is removed from the watchlist of the user
-     * @return
+     * @return <code>true</code> if the first result is a <code>ResultSet</code>
+     *         object; <code>false</code> if the first result is an update
+     *         count or there is no result
      * @throws SQLException thrown if the movie could not be removed from the watchlist, or the movie does not exist
      */
     public boolean removeFromWatchlist(int userId, Movie movie) throws SQLException {
@@ -90,7 +95,9 @@ public class UserService {
      * @param userId identifier for the current user
      * @param movie the movie which is selected
      * @param watched boolean value if the movie is watched or not
-     * @return
+     * @return <code>true</code> if the first result is a <code>ResultSet</code>
+     *         object; <code>false</code> if the first result is an update
+     *         count or there is no result
      * @throws SQLException thrown if the value could not be set, or the movie does not exist
      */
     public boolean setWatched(int userId, Movie movie, boolean watched) throws SQLException {
@@ -103,7 +110,9 @@ public class UserService {
      * @param userId identifier for the current user
      * @param movie the movie which is selected
      * @param rating rating (between 0 - 100)
-     * @return
+     * @return <code>true</code> if the first result is a <code>ResultSet</code>
+     *         object; <code>false</code> if the first result is an update
+     *         count or there is no result
      * @throws SQLException thrown if the value could not be set, or the movie does not exist
      */
     public boolean setRating(int userId, Movie movie, int rating) throws SQLException {
