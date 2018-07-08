@@ -239,7 +239,6 @@ class AddMovieController {
 				Platform.runLater(() -> {
 					user.linkMovie(movie);
 					WatchListItem wli = new WatchListItem(movie);
-					// USer.addWatchListItem(wli);
 					Router.instance().render(new MovieView(wli));
 				});
 			}

@@ -80,7 +80,7 @@ public class HomeViewController {
 			String parts[] = query.split("\\s");
 			
 			ArrayList<WatchListItem> filtered = list.stream().filter((wli) -> {
-				String source = (wli.getMovie().getTitle() + " " + wli.getMovie().getYear()).toLowerCase();
+				String source = (wli.getMovie().getTitle() + " " + wli.getMovie().getYear() + " " + wli.getMovie().getDirector().getName()).toLowerCase();
 				return Arrays.stream(parts).allMatch((part) -> source.contains(part));
 			}).collect(Collectors.toCollection(ArrayList::new));
 			

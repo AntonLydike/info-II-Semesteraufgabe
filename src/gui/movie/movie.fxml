@@ -26,7 +26,7 @@
                            </image>
                         </ImageView>
                         <Label fx:id="title" styleClass="title" />
-                        <Label fx:id="year" text="(2017)">
+                        <Label fx:id="year" text="(2017)" textOverrun="CLIP">
                            <styleClass>
                               <String fx:value="title2" />
                               <String fx:value="grey" />
