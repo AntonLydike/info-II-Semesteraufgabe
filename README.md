@@ -43,6 +43,19 @@ Der Router ist im Singleton-Muster implementiert und kann Objekte die Renderable
 
 Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Controller um auf Events zu reagieren / das Template mit Daten zu füllen.
 
+### Datenbank Schicht:
+
+![DB Diagram](DB_model.png)
+
+Die Datenbank-Schicht wurde sehr generisch implementiert, damit Erweiterungen ohne großen Aufwand möglich sind. 
+Um das Datenmodell von der Datenbank in ein Java Objekt zu transferieren, wird mit einer Annotation gearbeitet, die beim Auslesen die Felder auf die entsprechenden Attribute automatisch mappt.
+Zusätzlich stehen grundlegende Funktionen, wie z.B. nach einer ID suchen, als Basis zur Verfügung und können durch einfache Vererbung verwendet werden.
+
+### Service Schicht:
+
+Die Service Schicht ist die Schnittstelle zwischen der Datenbank Schicht und der GUI. Hier werden alle nötigen Funktionen für die GUI
+zur Verfügung gestellt.
+
 ## ToDo:
 
 **Views**
@@ -67,5 +80,5 @@ Viele GUI-Komponenten wurden in FXML Geschrieben und haben einen internen Contro
  - login(username, password)
  - register(username, password)
  
- The movies actors and persons in general are **not** stored in the DB but are pulled in real time from RT.
+ The movie actors and persons in general are **not** stored in the DB but are pulled in real time from RT.
  
