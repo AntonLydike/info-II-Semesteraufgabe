@@ -10,6 +10,8 @@ public class Person implements Comparable<Person>{
 	private String imageURL;
 	private String rtPath; // path on rotten tomatoes, primary ID
 	
+	public static final String NO_PERSON_IMAGE = "https://staticv2-4.rottentomatoes.com/static/images/redesign/actor.default.tmb.gif";
+	
 	public Person() {
 		// TODO Auto-generated constructor stub
 	}

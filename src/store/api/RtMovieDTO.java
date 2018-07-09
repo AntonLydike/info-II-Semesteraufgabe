@@ -33,7 +33,7 @@ public class RtMovieDTO {
 			if (obj.has("director")) {
 				director = new Person(obj.getJSONObject("director").getString("name"), "", obj.getJSONObject("director").getString("url"));
 			} else {
-				director = new Person("??", "https://staticv2-4.rottentomatoes.com/static/images/redesign/actor.default.tmb.gif","/nobody");
+				director = new Person("??", Person.NO_PERSON_IMAGE, "/nobody");
 			}
 			title = getString(obj, "title");
 			description = getString(obj, "description");

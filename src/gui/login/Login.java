@@ -67,10 +67,7 @@ class LoginController {
 		// register first (if necessary)
 		if (!isLoginView) {
 			try {
-				if (!userService.register(username.getText().trim(), password.getText())) {
-					LayoutController.error("This user is already registered!");
-					return;
-				}
+				userService.register(username.getText().trim(), password.getText());
 			} catch (RegisterFailedException e1) {
 				LayoutController.error(e1.getMessage());
 				return;

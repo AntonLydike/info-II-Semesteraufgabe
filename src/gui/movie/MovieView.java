@@ -80,8 +80,9 @@ class MovieViewController {
 	public MovieViewController(WatchListItem wli) {
 		this.wli = wli;
 		
-		//MovieViewController self = this;
-		
+		// if it's a custom movie, don't even try loading actors for it...
+		if (wli.getMovie().getRtPath().startsWith("/custom/")) return;
+				
 		(new Thread() {
 			public void run() {
 				MovieInfoApi api = new MovieInfoApi();

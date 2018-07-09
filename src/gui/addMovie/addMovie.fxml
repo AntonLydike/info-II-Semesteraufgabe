@@ -33,7 +33,12 @@
          <children>
             <ScrollPane fx:id="searchScroll" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="78.0" prefViewportWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="0.0">
                <content>
-                  <VBox fx:id="searchResults" layoutX="78.0" spacing="8.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="0.0" />
+                  <VBox alignment="TOP_CENTER" spacing="16.0">
+                     <children>
+                        <VBox fx:id="searchResults" layoutX="78.0" spacing="8.0" AnchorPane.leftAnchor="78.0" AnchorPane.rightAnchor="78.0" AnchorPane.topAnchor="0.0" />
+                        <Button fx:id="addCustom" mnemonicParsing="false" onAction="#addCustomMovie" text="ADD CUSTOM MOVIE" />
+                     </children>
+                  </VBox>
                </content>
             </ScrollPane>
          </children>

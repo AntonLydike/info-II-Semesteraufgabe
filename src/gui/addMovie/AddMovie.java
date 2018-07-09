@@ -1,8 +1,10 @@
 package gui.addMovie;
 
 import java.io.IOException;
-
+import java.net.MalformedURLException;
+import java.util.Optional;
 import data.Movie;
+import data.Person;
 import data.User;
 import data.WatchListItem;
 import exception.APIRequestException;
@@ -18,8 +20,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -67,6 +76,7 @@ class AddMovieController {
 	@FXML TextField searchBar;
 	@FXML ImageView backbtn;
 	@FXML ImageView searchbtn;
+	@FXML Button addCustom;
 	
 	public AddMovieController (User u) {
 		user = u;
@@ -87,15 +97,18 @@ class AddMovieController {
 		});
 		
 		searchBar.requestFocus();
+		addCustom.setVisible(false);
 	}
 	
 	private void loader(boolean display) {
 		if (display) {
 			searchResults.getChildren().clear();
 			searchResults.getChildren().add(loader);
-			loader.setVisible(true);	
+			loader.setVisible(true);
+			addCustom.setVisible(false);
 		} else {
 			searchResults.getChildren().remove(loader);
+			addCustom.setVisible(true);
 		}
 	}
 	
@@ -250,11 +263,87 @@ class AddMovieController {
 				System.out.println(movie.toString());
 				
 				Platform.runLater(() -> {
-					user.linkMovie(movie);
-					WatchListItem wli = new WatchListItem(movie);
-					Router.instance().render(new MovieView(wli));
+					if (user.linkMovie(movie)) {
+						WatchListItem wli = new WatchListItem(movie);
+						Router.instance().render(new MovieView(wli));	
+					} else {
+						LayoutController.error("Couldn't add Movie!");
+						Router.instance().render(new HomeView());
+					}
 				});
 			}
 		}).start();		
+	}
+	
+	@FXML void addCustomMovie(ActionEvent e) {
+		// default poster on rotten tomatoes
+		String noPosterUrl = "https://staticv2-4.rottentomatoes.com/static/images/redesign/poster_default_redesign.gif";
+		
+		ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+		
+		Dialog<Movie> dialog = new Dialog<>();
+		TextField title = new TextField(),
+				  director = new TextField(),
+				  year = new TextField(),
+				  poster = new TextField();
+		TextArea description = new TextArea();
+		
+		dialog.setTitle("Add a new custom movie");
+		dialog.setHeaderText(null);
+		
+		GridPane grid = new GridPane();
+		grid.setHgap(16);
+		grid.setVgap(16);
+		grid.add(new Label("Title:"), 0, 0);
+		grid.add(title, 1, 0);
+		grid.add(new Label("Year:"), 0, 1);
+		grid.add(year, 1, 1);
+		grid.add(new Label("Poster Image URL:"), 0, 2);
+		grid.add(poster, 1, 2);
+		grid.add(new Label("Director:"), 0, 3);
+		grid.add(director, 1, 3);
+		grid.add(new Label("Description:"), 0, 4);
+		grid.add(description, 1, 4);
+		
+		dialog.getDialogPane().getButtonTypes().addAll(submit, ButtonType.CANCEL);
+		
+		dialog.getDialogPane().setContent(grid);
+		
+		dialog.setResultConverter(dialogButton -> {
+		    if (dialogButton == submit) {
+		    	if (title.getText().trim() == "") return null;
+		    	String posterUrl = poster.getText().trim();
+		    	if (posterUrl.length() == 0) posterUrl = noPosterUrl;
+		    	// test values
+		    	try {
+		    		new java.net.URL(posterUrl);
+		    		Integer.parseInt(year.getText());
+		    	} catch (NumberFormatException | MalformedURLException err) {
+		    		return null;
+		    	}
+		        Movie mov = new Movie("/custom/" + user.getId() + "/" + title.getText().trim());
+		        mov.setTitle(title.getText());
+		    	mov.setDescription(description.getText().trim());
+		    	mov.setYear(Integer.parseInt(year.getText().trim()));
+		    	mov.setPosterURL(posterUrl);
+		    	mov.setDirector(new Person(director.getText().trim(), Person.NO_PERSON_IMAGE, "/custom/" + user.getId() + "/" + director.getText().trim()));
+		    	return mov;
+		    }
+		    return null;
+		});
+		
+		Optional<Movie> result = dialog.showAndWait();
+		
+		if (result.isPresent()) {
+			Movie movie = result.get();
+			if (user.linkMovie(movie)) {
+				WatchListItem wli = new WatchListItem(movie);
+				Router.instance().render(new MovieView(wli));	
+			} else {
+				LayoutController.error("Couldn't add Movie!");
+			}
+		} else {
+			LayoutController.error("Couldn't add Movie!");
+		}
 	}
 }

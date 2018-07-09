@@ -1,14 +1,12 @@
 package gui.components;
 
 import java.io.IOException;
-
 import gui.CachedImage;
 import gui.Renderable;
 import gui.Router;
 import gui.movie.MovieView;
 import data.Movie;
 import data.WatchListItem;
-import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.*;
 import javafx.scene.control.*;
@@ -88,14 +86,14 @@ class MovieCardController {
 		
 		// do lot's of calculating to compile all the ratings together...
 		byte ratings[] = {m.getImdbRating(), m.getRtaRating(), m.getRtRating(), m.getMcRating(), item.getRating()};
-		int total = 0, count = 0;
+		int total = 0, count = 0, rating = 0;
 		for (byte b: ratings) {
 			if (b != -1) {
 				total += b;
 				count++;
 			}
 		}
-		int rating = total / count;
+		if (count != 0) rating = total / count;
 
 		// image paths
 		String fullStar = "/gui/images/star.png";
