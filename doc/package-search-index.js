@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"store.api"}]
+packageSearchIndex = [{"l":"application"},{"l":"data"},{"l":"data.common"},{"l":"data.dto"},{"l":"data.store.common"},{"l":"data.store.movie"},{"l":"data.store.person"},{"l":"data.store.user"},{"l":"data.store.watchlist"},{"l":"exception"},{"l":"gui"},{"l":"gui.addMovie"},{"l":"gui.components"},{"l":"gui.home"},{"l":"gui.login"},{"l":"gui.movie"},{"l":"gui.movieList"},{"l":"service"},{"l":"store.api"}]

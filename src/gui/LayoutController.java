@@ -31,7 +31,7 @@ public class LayoutController {
 	
 	/**
 	 * Gets the current instance of the LayoutController
-	 * @return
+	 * @return LayoutController instance
 	 */
 	public static LayoutController instance() {
 		return instance;
@@ -39,7 +39,7 @@ public class LayoutController {
 	
 	/**
 	 * Displays the given String in the Error textbox at the bottom of the app
-	 * @param text
+	 * @param text The error Text
 	 */
 	public static void error(String text) {
 		instance.error.setText(text);

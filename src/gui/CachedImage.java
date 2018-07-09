@@ -14,8 +14,8 @@ public class CachedImage {
 	
 	/**
 	 * Returns either an already loaded image, or loads it (blocking) and then returns it. 
-	 * @param url
-	 * @return
+	 * @param url URL from which the Image should be loaded
+	 * @return a cached Image for the URL
 	 */
 	public static Image get(String url) {
 		if (cache.containsKey(url)) {

@@ -18,7 +18,7 @@ public class Loader implements Renderable {
 	
 	/**
 	 * Returns an Image with the dark loading icon
-	 * @return
+	 * @return Dark loader gif Image object
 	 */
 	public static Image getImage() {
 		return new Image("/gui/images/loader.dark.gif");

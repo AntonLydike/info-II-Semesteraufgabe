@@ -37,7 +37,7 @@ public class Router {
 	
 	/**
 	 * gets the current router instance, must be initialized first
-	 * @return
+	 * @return Router instance
 	 */
 	public static Router instance() {
 		if (instance == null) {
