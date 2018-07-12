@@ -1,20 +1,5 @@
 # Semesteraufgabe
 
-## Ausführen:
-
-Benötigt JRE 10 (oder neuer).
-
- - Unter Windows: Doppel-Click auf `übung7-gruppe6.rar`
- - Unter Linux / MacOS(?): Im terminal: (in den Ordner navigieren und dann) `java -jar übung7-gruppe6.jar`
- 
-Wenn der Quellcode selbst ausgeführt werden soll muss JavaFX Installiert sein. [Tutorial for Eclipse](https://www.eclipse.org/efxclipse/install.html#for-the-lazy). Das mitgelieferte jar ist bereits mit javafx kompiliert worde, benötigt also keine weiteren bibliotheken.
-
-Außerdem werden MySQL Treiber und java-json Bibliotheken gebraucht, die im Projekt enthalten sind.
-
-Wir verwenden einen Scraper, der RottenTomatoes und IMDB scraped. Dieser ist komplett von uns in PHP geschrieben und wird auf antonlydike.de/scraper gehostet (mit api-key versehen). Er kommuniziert mit Java über JSON. Der Quellcode dafür liegt bei, muss jedoch nicht selber gehostet werden damit das Program funktioniert. 
-
-Die Datenbank wird ebenfalls von Anton gehostet.
-
 ## Benutzung:
 
 Ein paar Tipps zur benutzung:
