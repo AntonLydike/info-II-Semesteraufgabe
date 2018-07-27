@@ -1,9 +1,11 @@
 # Semesteraufgabe
 
+![Screenshot](screenshot.png)
+
 ## Benutzung:
 
 Ein paar Tipps zur benutzung:
-
+ - Die Datenbank und der Scraper sind offline / deaktiviert. Bei interesse bitte kontakt aufnehmen.
  - Doppel-Klick auf Film öffnet eine detailreichere Übersicht.
  - Um einen Film zur Watchlist hinzuzufügen, muss auf den Button oben links (in der watchlist ansicht) geklickt werden.
  - Um einen eigenen Film hinzuzufügen, muss in der Suche ganz nach unten gescrollt werden und dann auf "Add custom movie" geklickt werden.
